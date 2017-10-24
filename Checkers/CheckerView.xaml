@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Checkers.CheckerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Checkers"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ComboBox x:Name="Combobox1"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" ItemsSource="{Binding comboBoxContent}"/>
+        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBox x:Name="TextBox1"  HorizontalAlignment="Left" Height="122" Margin="0,27,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300"/>
+        <TextBlock x:Name="TextBlock1"   HorizontalAlignment="Left" Margin="0,154,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="121" Width="300"/>
+    </Grid>
+
+</UserControl>
