@@ -6,11 +6,12 @@
              xmlns:local="clr-namespace:Checkers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <ComboBox x:Name="Combobox1"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" ItemsSource="{Binding comboBoxContent}"/>
-        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,280,0,0" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="TextBox1"  HorizontalAlignment="Left" Height="122" Margin="0,27,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300"/>
-        <TextBlock x:Name="TextBlock1"   HorizontalAlignment="Left" Margin="0,154,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="121" Width="300"/>
-    </Grid>
+    <StackPanel>
+        <ComboBox x:Name="ComboAuswahl"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" ItemsSource="{Binding ComboBoxContent}" SelectedItem="{Binding SelectedItem}"/>
+        <TextBox Name="TextBox1"  HorizontalAlignment="Left" Height="122" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="300" />
+        <TextBlock x:Name="TextBlock1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding TextBoxMessage,Mode=OneWay}" VerticalAlignment="Top" Height="121" Width="300" />
+        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="300"/>
+
+    </StackPanel>
 
 </UserControl>

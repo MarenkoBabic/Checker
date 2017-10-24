@@ -5,6 +5,8 @@
     /// </summary>
     public interface IChecker
     {
+
+
         /// <summary>
         /// Validiert einen String und liefert das Ergebnis als bool
         /// </summary>

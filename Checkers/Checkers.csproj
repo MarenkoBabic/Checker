@@ -74,6 +74,7 @@
       <DependentUpon>CheckerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CheckerViewModel.cs" />
+    <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="ICheckerViewModel.cs" />
     <Compile Include="OddEvenChecker.cs" />
     <Compile Include="PalindromeChecker.cs" />
-    <Compile Include="PalindromeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

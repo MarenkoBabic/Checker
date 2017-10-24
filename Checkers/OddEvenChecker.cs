@@ -2,13 +2,13 @@
 {
     using System;
 
-    class OddEvenChecker : IChecker
+    class OddEvenChecker 
     {
-        public bool Validate( string value )
-        {
-            // ValidateOddEven
-            throw new NotImplementedException();
+        //public bool Validate( string value )
+        //{
+        //    // ValidateOddEven
+        //    throw new NotImplementedException();
 
-        }
+        //}
     }
 }

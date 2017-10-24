@@ -4,6 +4,7 @@
     {
         public bool Validate( string value )
         {
+
             // Check if text is german
 
             return true;
