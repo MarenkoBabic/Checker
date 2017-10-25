@@ -13,7 +13,12 @@
                 returnText = returnText + value[i];
             }
 
-            if( value == returnText )
+            if(
+                value.ToLower().Replace( " ", "" ).Replace( ".", "" ).Replace( ":", "" ).Replace( ",", "" ).Replace( ";", "" )
+                .Replace( "!", "" ).Replace( "?", "" ).Replace( "-", "" ).Replace( "_", "" )
+                ==
+                returnText.ToLower().Replace( " ", "" ).Replace( ".", "" ).Replace( ":", "" ).Replace( ",", "" ).Replace( ";", "" )
+                .Replace( "!", "" ).Replace( "?", "" ).Replace( "-", "" ).Replace( "_", "" ) )
             {
                 return true;
             }
@@ -24,3 +29,4 @@
         }
     }
 }
+

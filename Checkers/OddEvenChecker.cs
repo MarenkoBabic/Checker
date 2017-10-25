@@ -6,10 +6,10 @@ namespace Checkers
     {
         public bool Validate( string value )
         {
+            
+            double zahl = Convert.ToDouble( value );
 
-            double zahl = Convert.ToDouble( "value" );
-
-            if( zahl%2 == 0 )
+            if( zahl % 2 == 0 )
             {
                 return true;
             }

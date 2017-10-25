@@ -70,8 +70,17 @@
         /// </summary>
         public void CheckButton()
         {
-            bool result = SelectedChecker.Validate( text );
-            TextBoxMessage = result.ToString();
+
+            if( SelectedChecker == null)
+            {
+                MessageBox.Show( "Checker Auswählen" );
+            }
+            else
+            {
+                bool result = SelectedChecker.Validate( text );
+                TextBoxMessage = result.ToString();
+
+            }
         }
 
         private string textBoxMessage;
