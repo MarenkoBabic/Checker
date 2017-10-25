@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Checkers
 {
@@ -6,7 +7,7 @@ namespace Checkers
     {
         public bool Validate( string value )
         {
-            
+
             double zahl = Convert.ToDouble( value );
 
             if( zahl % 2 == 0 )
