@@ -1,64 +1,26 @@
 ﻿namespace Checkers
 {
-    using System.Windows;
-    using System.Windows.Controls;
     using Caliburn.Micro;
-
-    public class PalindromeChecker : PropertyChangedBase, IChecker
+    public class PalindromeChecker : IChecker
     {
-        public string Text
-        {
-            get
-            {
-                return text;
-            }
-            set
-            {
-                text = value;
-                NotifyOfPropertyChange( () => CanResult() );
-                NotifyOfPropertyChange( () => Text );
-            }
-        }
 
-
-
-
-
-
-        public bool Validate( string value )
-        {
-            return false;
-        }
-
-
-        public bool CanResult()
-        {
-            return !string.IsNullOrWhiteSpace( Text );
-        }
-
-        public string Result( string Text,string resultText )
+        bool IChecker.Validate( string value )
         {
             string returnText = "";
-            for( int i = Text.Length - 1; i >= 0; i-- )
+
+            for( int i = value.Length - 1; i >= 0; i-- )
             {
-                returnText = returnText + Text[i];
+                returnText = returnText + value[i];
             }
 
-            if( Text == returnText )
+            if( value == returnText )
             {
-                resultText = Text + "ist ein Palidrome";
-                return resultText;
+                return true;
             }
             else
             {
-                MessageBox.Show( Text + " ist Kein Palidrome" );
-                return text;
+                return false;
             }
         }
-
-
-        private string text;
-
-
     }
 }

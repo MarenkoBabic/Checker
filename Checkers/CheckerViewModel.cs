@@ -7,6 +7,10 @@
     public class CheckerViewModel : ViewModelBase
     {
         #region propertys
+
+        public IChecker SelectedChecker { get; set; }
+
+
         /// <summary>
         /// ReturnWert Text für TextBox
         /// </summary>
@@ -19,27 +23,11 @@
             set
             {
                 textBoxMessage = value;
-                OnPropertyChanged( textBoxMessage );
+                OnPropertyChanged( "textBoxMessage" );
             }
         }
 
-        /// <summary>
-        /// Property für Auswahl Comboboxitem
-        /// </summary>
-        public string SelectedItem
-        {
-
-            get
-            {
-                return selectedItem;
-            }
-            set
-            {
-                selectedItem = value;
-                OnPropertyChanged( "Auswahl" );
-            }
-        }
-        /// <summary>
+        ///<summary>
         /// Property für Text
         /// </summary>
         public string Text
@@ -53,10 +41,11 @@
                 text = value;
             }
         }
+
         /// <summary>
         /// Property ComboboxInhalt
         /// </summary>
-        public ObservableCollection<string> ComboBoxContent
+        public List<IChecker> CheckerAuswahl
         {
             get;
             private set;
@@ -69,56 +58,24 @@
             //List<IChecker> befüllen mit Klassen
             this.checker = new List<IChecker>()
             {
-                new PalindromeChecker(),new GermanChecker()
+                new PalindromeChecker(),new GermanChecker(),new OddEvenChecker()
             };
-            //ComboBoxItems befüllen mit strings
-            ComboBoxContent = new ObservableCollection<string>
-            {
-                "PalindromeChecker","OddEvenChecker","GermanChecker",
-            };
+            CheckerAuswahl = checker;
         }
 
 
-      /// <summary>
-      /// 
-      /// 
-      /// </summary>
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
         public void CheckButton()
         {
-            #region If Else AuswahlCombobox
-            if( SelectedItem == "PalindromeChecker" )
-            {
-                string resultText = "";
-                PalindromeChecker palindromeChecker = new PalindromeChecker();
-                if(!string.IsNullOrEmpty( Text ) )
-                {
-                    palindromeChecker.Result(Text,resultText);
-                    textBoxMessage = resultText;
-                }
-                else
-                {
-                    palindromeChecker.CanResult();
-
-                }
-            }
-            else if( selectedItem == "OddEvenChecker" )
-            {
-                OddEvenChecker oddEvenChecker = new OddEvenChecker();
-                MessageBox.Show( "oddEvenCHecker" );
-            }
-            else
-            {
-                GermanChecker germanChecker = new GermanChecker();
-                MessageBox.Show( "GermanChecker" );
-
-            }
-            #endregion
-
+            bool result = SelectedChecker.Validate( text );
+            TextBoxMessage = result.ToString();
         }
 
         private string textBoxMessage;
         private string text;
-        private string selectedItem;
         private List<IChecker> checker;
     }
 }

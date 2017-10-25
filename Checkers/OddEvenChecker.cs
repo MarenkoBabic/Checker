@@ -1,14 +1,22 @@
-﻿namespace Checkers
+﻿using System;
+
+namespace Checkers
 {
-    using System;
-
-    class OddEvenChecker 
+    class OddEvenChecker : IChecker
     {
-        //public bool Validate( string value )
-        //{
-        //    // ValidateOddEven
-        //    throw new NotImplementedException();
+        public bool Validate( string value )
+        {
 
-        //}
+            double zahl = Convert.ToDouble( "value" );
+
+            if( zahl%2 == 0 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
