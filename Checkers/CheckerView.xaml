@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <ComboBox x:Name="CheckerAuswahl"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}"/>
-        <TextBox Name="TextBox1"  HorizontalAlignment="Left" Height="122" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="300" />
-        <TextBlock x:Name="TextBlock1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxMessage,UpdateSourceTrigger=Default,Mode=TwoWay}" TextBlock.FontSize="100" TextBlock.TextAlignment="Center" VerticalAlignment="Top" Height="121" Width="300" Background="Beige" />
+        <TextBox Name="TextBox_EingabeText"  HorizontalAlignment="Left" Height="122" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="300" />
+        <TextBlock x:Name="TextBlock_Ergebnis" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxMessage,UpdateSourceTrigger=Default,Mode=TwoWay}" TextBlock.FontSize="100" TextBlock.TextAlignment="Center" VerticalAlignment="Top" Height="121" Width="300" Background="Beige" />
         <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="300"/>
 
     </StackPanel>

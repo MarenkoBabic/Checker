@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace Checkers
 {
-    class OddEvenChecker : IChecker
+    public class OddEvenChecker : IChecker
     {
         public bool Validate( string value )
         {
-
-            double zahl = Convert.ToDouble( value );
-
-            if( zahl % 2 == 0 )
+            if( !Regex.IsMatch( value, "^[0-9.]*$" ) )
             {
-                return true;
+                MessageBox.Show( "Nur Zahlen von 0-9 eingeben" );
+                return false;
             }
             else
             {
-                return false;
+                double zahl = Convert.ToDouble( value );
+                if( zahl % 2 == 0 )
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

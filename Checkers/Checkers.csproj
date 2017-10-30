@@ -78,7 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="GermanChecker.cs" />
     <Compile Include="ICheckerViewModel.cs" />
     <Compile Include="OddEvenChecker.cs" />
     <Compile Include="PalindromeChecker.cs" />
