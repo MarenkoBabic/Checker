@@ -9,8 +9,6 @@
     {
         #region propertys
         public IChecker SelectedChecker { get; set; }
-
-
         public string TextBoxMessage
         {
             get
@@ -23,7 +21,6 @@
                 OnPropertyChanged( "textBoxMessage" );
             }
         }
-
         public string Text
         {
             get
@@ -35,14 +32,12 @@
                 text = value;
             }
         }
-
         public List<IChecker> CheckerAuswahl
         {
             get;
             private set;
         }
         #endregion
-
 
         public CheckerViewModel()
         {
@@ -53,7 +48,6 @@
             };
             CheckerAuswahl = checker;
         }
-
 
         /// <summary>
         /// Funktion beim betätigen vom Button 
@@ -69,7 +63,6 @@
             bool result = SelectedChecker.Validate( text );
             // Trägt in der TextBox ein ob der Check richtig / falsch ist
             TextBoxMessage = result.ToString();
-
         }
 
         private string textBoxMessage;
