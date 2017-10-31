@@ -1,38 +1,43 @@
 ﻿namespace Checkers
 {
+    using System.Text.RegularExpressions;
     using Caliburn.Micro;
     public class PalindromeChecker : IChecker
     {
-
-        bool IChecker.Validate( string value )
+        bool IChecker.Validate(string value )
         {
-            string returnText = "";
-            if( string.IsNullOrWhiteSpace( value ) )
+            try
             {
-                return false;
-            }
-            else
-            {
-                for( int i = value.Length - 1; i >= 0; i-- )
-                {
-                    returnText = returnText + value[i];
-                }
-
-                if(
-                    value.ToLower().Replace( " ", "" ).Replace( ".", "" ).Replace( ":", "" ).Replace( ",", "" ).Replace( ";", "" )
-                    .Replace( "!", "" ).Replace( "?", "" ).Replace( "-", "" ).Replace( "_", "" )
-                    ==
-                    returnText.ToLower().Replace( " ", "" ).Replace( ".", "" ).Replace( ":", "" ).Replace( ",", "" ).Replace( ";", "" )
-                    .Replace( "!", "" ).Replace( "?", "" ).Replace( "-", "" ).Replace( "_", "" ) )
-                {
-                    return true;
-                }
-                else
+                string tempText = "";
+                value = Regex.Replace( value.ToLower(), "[^a-zA-z]+", string.Empty );
+                if( string.IsNullOrWhiteSpace( value ) )
                 {
                     return false;
                 }
+                else
+                {
+                    for( int i = value.Length - 1; i >= 0; i-- )
+                    {
+                        tempText = tempText + value[i];
+                    }
+                    if( value == tempText )
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
-
+            catch( System.Exception )
+            {
+                return false;
+            }
+        }
+        public override string ToString()
+        {
+            return "Palidrome";
         }
     }
 }

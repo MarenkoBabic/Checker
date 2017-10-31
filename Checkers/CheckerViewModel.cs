@@ -1,9 +1,7 @@
 ﻿namespace Checkers
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Text.RegularExpressions;
-    using System.Windows;
 
     public class CheckerViewModel : ViewModelBase
     {
@@ -38,7 +36,6 @@
             private set;
         }
         #endregion
-
         public CheckerViewModel()
         {
             //List<IChecker> befüllen mit Klassen
@@ -48,21 +45,76 @@
             };
             CheckerAuswahl = checker;
         }
-
         /// <summary>
         /// Funktion beim betätigen vom Button 
         /// </summary>
         public void CheckButton()
         {
             // Prüft ob der Checker ausgewählt ist/ Texteingabe leer 
-            if( SelectedChecker == null )
+            if( SelectedChecker == null && string.IsNullOrEmpty( text ) )
             {
-                MessageBox.Show( "Checker Auswählen" );
+                TextBoxMessage = "Checker auswählen und text eingeben";
             }
-            //läuft die Methode durch und holt sich den wert zurück
-            bool result = SelectedChecker.Validate( text );
-            // Trägt in der TextBox ein ob der Check richtig / falsch ist
-            TextBoxMessage = result.ToString();
+            else if( SelectedChecker == null )
+            {
+                TextBoxMessage = "Checker Auswählen";
+            }
+            else
+            {
+                //läuft die Methode durch und holt sich den wert zurück
+                if( SelectedChecker == checker[0] )
+                {
+                    if( text == null || text.Trim() == "" )
+                    {
+                        TextBoxMessage = " Text eingeben";
+                    }
+                    else
+                    {
+                        bool result = SelectedChecker.Validate( text );
+                        TextBoxMessage = PalindromeResult( result );
+                    }
+                }
+                //Trägt in der TextBox ein ob der Check richtig / falsch ist
+                else if( SelectedChecker == checker[1] )
+                {
+                    if( text == null || text == "" )
+                    {
+                        TextBoxMessage = " Zahl eingeben";
+                    }
+                    else
+                    {
+                        text = Regex.Replace( text, "[^0-9]+", string.Empty );
+                        bool result = SelectedChecker.Validate( text );
+                        TextBoxMessage = OddEvenResult( result );
+                    }
+                }
+            }
+        }
+        public string PalindromeResult( bool result )
+        {
+            if( result == true )
+            {
+                return text + "\nist ein Palindrome";
+            }
+            else
+            {
+                return text + "\nist kein Palindrome";
+            }
+        }
+        public string OddEvenResult( bool result )
+        {
+            if( text == null || text == "" )
+            {
+                text = "0";
+            }
+            if( result == true )
+            {
+                return text + " ist eine gerade Zahl";
+            }
+            else
+            {
+                return text + " ist eine ungerade Zahl";
+            }
         }
 
         private string textBoxMessage;

@@ -14,7 +14,7 @@ namespace CheckersTest
         {
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
-            bool isPalidrome = checker.Validate( " " );
+            bool isPalidrome = checker.Validate( String.Empty );
 
             Assert.False( isPalidrome );
         }
@@ -37,9 +37,7 @@ namespace CheckersTest
             bool isPalidrome = checker.Validate( "mom" );
 
             Assert.True( isPalidrome );
-
         }
-
 
         [Fact]
         public void TheStringIsNotAPalindrome_ReturnFalse()
@@ -54,13 +52,40 @@ namespace CheckersTest
         [Fact]
         public void TheStringIsNotAPalindromeWith3Letters_ReturnFalse()
         {
+            //Arrange
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
+            //Act
             bool isPalidrome = checker.Validate( "Opa" );
 
+            //Assert
             Assert.False( isPalidrome );
+        }
+        
+        [Fact]
+        public void PalidromeTheStringIsAPalidromeWithSentence_ReturnTrue()
+        {
+            //Arrange
+            Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
+            //Act
+            bool isPalidrome = checker.Validate( "Geist ziert Leben, Mut hegt Siege, Beileid trägt belegbare Reue, Neid dient nie, nun eint Neid die Neuerer, abgelebt gärt die Liebe, Geist geht, umnebelt reizt Sieg." );
+
+            //Assert
+            Assert.True( isPalidrome );
         }
 
+        [Fact]
+        public void PalidromeValidateIsNull_ReturnFalse()
+        {
+            //Arrange
+            Checkers.IChecker checker = new Checkers.PalindromeChecker();
+
+            //Act
+            bool isPalidrome = checker.Validate( null );
+
+            //Assert
+            Assert.False( isPalidrome );
+        }
     }
 }

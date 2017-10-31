@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="500">
     <StackPanel>
-        <ComboBox x:Name="CheckerAuswahl"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}"/>
-        <TextBox Name="TextBox_EingabeText"  HorizontalAlignment="Left" Height="122" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="300" />
-        <TextBlock x:Name="TextBlock_Ergebnis" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxMessage,UpdateSourceTrigger=Default,Mode=TwoWay}" TextBlock.FontSize="100" TextBlock.TextAlignment="Center" VerticalAlignment="Top" Height="121" Width="300" Background="Beige" />
-        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="300"/>
+        <ComboBox x:Name="CheckerAuswahl"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}"/>
+        <TextBox Name="TextBox_EingabeText"  HorizontalAlignment="Left" Height="122"  TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="500" />
+        <TextBlock x:Name="TextBlock_Ergebnis" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxMessage,UpdateSourceTrigger=Default,Mode=TwoWay}" FontSize="20" VerticalAlignment="Top" Height="121" Width="500" Background="Beige" />
+        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="500"/>
 
     </StackPanel>
 

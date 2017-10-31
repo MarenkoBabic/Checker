@@ -9,11 +9,6 @@ namespace CheckersTest
 {
     public class OddEvenCheckerTest
     {
-        /// <summary>
-        /// True == Even
-        /// false == Odd
-        /// 
-        /// </summary>
         [Fact]
         public void TheStringIsOnlyNumbers_ReturnTrue()
         {
@@ -34,7 +29,6 @@ namespace CheckersTest
             Assert.False( isOnlyNumbersAndOdd );
         }
 
-
         [Fact]
         public void TheStringIsEven_ReturnTrue()
         {
@@ -46,7 +40,7 @@ namespace CheckersTest
         }
 
         [Fact]
-        public void TheStringIsOdd_ReturnTrue()
+        public void TheStringIsOdd_ReturnFalse()
         {
             Checkers.IChecker checker = new Checkers.OddEvenChecker();
 
@@ -62,13 +56,20 @@ namespace CheckersTest
 
             bool isOnlyNumbers = checker.Validate( "12ab34cd" );
 
-            Assert.False( isOnlyNumbers );
+            Assert.True( isOnlyNumbers );
         }
 
+        [Fact]
+        public void OddEvenTheStringIsNull_ReturnFalse()
+        {
+            //Arrange
+            Checkers.IChecker checker = new Checkers.OddEvenChecker();
 
+            //Act
+            bool isNull = checker.Validate( null );
 
-
-
-
+            //Assert
+            Assert.False( isNull );
+        }
     }
 }

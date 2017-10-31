@@ -1,38 +1,24 @@
 ﻿namespace Checkers
 {
     using System;
-    using System.Text.RegularExpressions;
-    using System.Windows;
-
-    public class OddEvenChecker : IChecker
+    public class OddEvenChecker : ViewModelBase, IChecker
     {
         public bool Validate( string value )
         {
-            if( string.IsNullOrWhiteSpace( value ) )
+            int zahl;
+            bool result = Int32.TryParse( value, out zahl );
+            if( zahl % 2 == 0 )
             {
-                MessageBox.Show( "Zahl eingeben" );
-                return false;
+                return true;
             }
             else
             {
-                if( !Regex.IsMatch( value, "^[0-9]*$" ) )
-                {
-                    MessageBox.Show( "Nur Zahlen von 0-9 eingeben" );
-                    return false;
-                }
-                else
-                {
-                    int zahl = Convert.ToInt32( value );
-                    if( zahl % 2 == 0 )
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                return false;
             }
+        }
+        public override string ToString()
+        {
+            return "Odd or Even";
         }
     }
 }
