@@ -1,7 +1,6 @@
 ﻿namespace Checkers
 {
     using System.Text.RegularExpressions;
-    using Caliburn.Micro;
     public class PalindromeChecker : IChecker
     {
         bool IChecker.Validate(string value )

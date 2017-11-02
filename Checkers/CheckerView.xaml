@@ -4,13 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500">
-    <StackPanel>
-        <ComboBox x:Name="CheckerAuswahl"     HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}"/>
-        <TextBox Name="TextBox_EingabeText"  HorizontalAlignment="Left" Height="122"  TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top" Width="500" />
-        <TextBlock x:Name="TextBlock_Ergebnis" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxMessage,UpdateSourceTrigger=Default,Mode=TwoWay}" FontSize="20" VerticalAlignment="Top" Height="121" Width="500" Background="Beige" />
-        <Button x:Name="CheckButton" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="500"/>
+             mc:Ignorable="d" d:DesignWidth="500" >
+
+
+    <StackPanel Margin="10,10,10,10">
+        <ComboBox x:Name="CheckerAuswahl" 
+                  ItemsSource="{Binding CheckerAuswahl  }"
+                  SelectedItem="{Binding SelectedChecker}"
+                  Height="30"  />
+        <TextBox Name="TextBox_EingabeText" 
+                 AcceptsReturn="True"
+                 Text="{Binding Text}"
+                 Height="160"
+                 TextWrapping="Wrap"/>
+        <TextBlock x:Name="TextBlock_Ergebnis"
+                   Text="{Binding Path=TextBlockMessage,UpdateSourceTrigger=Default,Mode=TwoWay}"
+                   Background="Beige" MinHeight="150"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"/>
+        <Button x:Name="CheckButton" Content="Button" Height="20" />
 
     </StackPanel>
 

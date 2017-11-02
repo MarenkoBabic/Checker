@@ -1,22 +1,36 @@
 ﻿namespace Checkers
 {
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
+    using System.Dynamic;
+    using System.Windows;
+    using System.Windows.Controls;
+    using Caliburn.Micro;
 
-    public class CheckerViewModel : ViewModelBase
+    public class CheckerViewModel : ViewModelBase, IHaveDisplayName
     {
         #region propertys
-        public IChecker SelectedChecker { get; set; }
-        public string TextBoxMessage
+        public string DisplayName
         {
             get
             {
-                return textBoxMessage;
+                return displayName;
             }
             set
             {
-                textBoxMessage = value;
-                OnPropertyChanged( "textBoxMessage" );
+                displayName = value;
+            }
+        }
+        public IChecker SelectedChecker { get; set; }
+        public string TextBlockMessage
+        {
+            get
+            {
+                return textBlockMessage;
+            }
+            set
+            {
+                textBlockMessage = value;
+                OnPropertyChanged( "textBlockMessage" );
             }
         }
         public string Text
@@ -35,6 +49,7 @@
             get;
             private set;
         }
+
         #endregion
         public CheckerViewModel()
         {
@@ -44,50 +59,41 @@
                 new PalindromeChecker(),new OddEvenChecker()
             };
             CheckerAuswahl = checker;
+
         }
+
+
         /// <summary>
         /// Funktion beim betätigen vom Button 
         /// </summary>
         public void CheckButton()
         {
-            // Prüft ob der Checker ausgewählt ist/ Texteingabe leer 
-            if( SelectedChecker == null && string.IsNullOrEmpty( text ) )
+            // Prüft ob Checker ausgewählt ist
+            if( SelectedChecker != null )
             {
-                TextBoxMessage = "Checker auswählen und text eingeben";
-            }
-            else if( SelectedChecker == null )
-            {
-                TextBoxMessage = "Checker Auswählen";
+                // Prüft ob Text vorhanden ist
+                if( !string.IsNullOrWhiteSpace( text ) )
+                {
+                    //Prüft welche Checker ausgewählt ist
+                    if( SelectedChecker is PalindromeChecker )
+                    {
+                        bool result = SelectedChecker.Validate( text );
+                        TextBlockMessage = PalindromeResult( result );
+                    }
+                    else if( SelectedChecker is OddEvenChecker )
+                    {
+                        bool result = SelectedChecker.Validate( text );
+                        TextBlockMessage = OddEvenResult( result );
+                    }
+                }
+                else
+                {
+                    TextBlockMessage = "Text eingeben";
+                }
             }
             else
             {
-                //läuft die Methode durch und holt sich den wert zurück
-                if( SelectedChecker == checker[0] )
-                {
-                    if( text == null || text.Trim() == "" )
-                    {
-                        TextBoxMessage = " Text eingeben";
-                    }
-                    else
-                    {
-                        bool result = SelectedChecker.Validate( text );
-                        TextBoxMessage = PalindromeResult( result );
-                    }
-                }
-                //Trägt in der TextBox ein ob der Check richtig / falsch ist
-                else if( SelectedChecker == checker[1] )
-                {
-                    if( text == null || text == "" )
-                    {
-                        TextBoxMessage = " Zahl eingeben";
-                    }
-                    else
-                    {
-                        text = Regex.Replace( text, "[^0-9]+", string.Empty );
-                        bool result = SelectedChecker.Validate( text );
-                        TextBoxMessage = OddEvenResult( result );
-                    }
-                }
+                TextBlockMessage = "Checker auswählen";
             }
         }
         public string PalindromeResult( bool result )
@@ -103,10 +109,6 @@
         }
         public string OddEvenResult( bool result )
         {
-            if( text == null || text == "" )
-            {
-                text = "0";
-            }
             if( result == true )
             {
                 return text + " ist eine gerade Zahl";
@@ -117,7 +119,9 @@
             }
         }
 
-        private string textBoxMessage;
+
+        private string displayName = "Checkers";
+        private string textBlockMessage;
         private string text;
         private List<IChecker> checker;
     }
