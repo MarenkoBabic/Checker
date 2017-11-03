@@ -3,12 +3,12 @@
     using System.Text.RegularExpressions;
     public class PalindromeChecker : IChecker
     {
-        bool IChecker.Validate(string value )
+        bool IChecker.Validate( string value )
         {
             try
             {
                 string tempText = "";
-                value = Regex.Replace( value.ToLower(), "[^a-zA-z]+", string.Empty );
+                value = Regex.Replace( value, "[^a-zA-Z]+", string.Empty );
                 if( string.IsNullOrWhiteSpace( value ) )
                 {
                     return false;
@@ -19,14 +19,7 @@
                     {
                         tempText = tempText + value[i];
                     }
-                    if( value == tempText )
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return string.Equals( value, tempText, System.StringComparison.OrdinalIgnoreCase );
                 }
             }
             catch( System.Exception )

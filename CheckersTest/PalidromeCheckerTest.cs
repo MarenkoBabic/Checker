@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace CheckersTest
+﻿namespace CheckersTest
 {
+    using System;
+    using Xunit;
     public class PalidromeCheckerTest
     {
         [Fact]
@@ -64,7 +59,7 @@ namespace CheckersTest
             //Assert
             Assert.False( isPalidrome );
         }
-        
+
         [Fact]
         public void PalidromeTheStringIsAPalidromeWithSentence_ReturnTrue()
         {
