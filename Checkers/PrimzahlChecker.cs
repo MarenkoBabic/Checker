@@ -11,7 +11,7 @@ namespace Checkers
                 bool result = double.TryParse( value, out zahl );
                 if( zahl % 2 != 0 )
                 {
-                    for( int i = 3; i < Math.Round(Math.Sqrt(zahl)); i += 2 )
+                    for( int i = 3; i < Math.Sqrt(zahl); i += 2 )
                     {
                         if( zahl % i == 0 )
                         {
