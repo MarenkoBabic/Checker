@@ -10,7 +10,7 @@ namespace CheckersTest
     public class PalidromeCheckerTest
     {
         [Fact]
-        public void TheStringIsEmpty_ReturnFalse()
+        public void PalindromeTheStringIsEmpty_ReturnFalse()
         {
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
@@ -20,7 +20,7 @@ namespace CheckersTest
         }
 
         [Fact]
-        public void TheStringIsAPalindromeWith2Letters_ReturnTrue()
+        public void PalindromeTheStringIsAPalindromeWith2Letters_ReturnTrue()
         {
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
@@ -30,7 +30,7 @@ namespace CheckersTest
         }
 
         [Fact]
-        public void TheStringIsAPalindromeWith3Letters_ReturnTrue()
+        public void PalindromeTheStringIsAPalindromeWith3Letters_ReturnTrue()
         {
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
@@ -40,17 +40,20 @@ namespace CheckersTest
         }
 
         [Fact]
-        public void TheStringIsNotAPalindrome_ReturnFalse()
+        public void PalindromeTheStringIsNotAPalindrome_ReturnFalse()
         {
+            //Arrange
             Checkers.IChecker checker = new Checkers.PalindromeChecker();
 
+            //Act
             bool isPalidrome = checker.Validate( "abcd" );
 
+            //Assert
             Assert.False( isPalidrome );
         }
 
         [Fact]
-        public void TheStringIsNotAPalindromeWith3Letters_ReturnFalse()
+        public void PalindromeTheStringIsNotAPalindromeWith3Letters_ReturnFalse()
         {
             //Arrange
             Checkers.IChecker checker = new Checkers.PalindromeChecker();

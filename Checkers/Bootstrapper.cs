@@ -20,8 +20,8 @@
                 {"SizeContent",SizeToContent.Manual },
                 {"MinHeight",420 },
                 {"MaxHeight",420 },
-                {"MinWidth",700 },
-                {"MaxWidth",700 }
+                {"MinWidth",780 },
+                {"MaxWidth",780 }
             };
             DisplayRootViewFor<CheckerViewModel>(settings);
         }

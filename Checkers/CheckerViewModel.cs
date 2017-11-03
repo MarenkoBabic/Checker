@@ -1,7 +1,9 @@
 ﻿namespace Checkers
 {
+    using System;
     using System.Collections.Generic;
     using System.Dynamic;
+    using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Controls;
     using Caliburn.Micro;
@@ -42,6 +44,7 @@
             set
             {
                 text = value;
+                OnPropertyChanged( Text );
             }
         }
         public List<IChecker> CheckerAuswahl
@@ -59,7 +62,6 @@
                 new PalindromeChecker(),new OddEvenChecker()
             };
             CheckerAuswahl = checker;
-
         }
 
 
@@ -82,8 +84,16 @@
                     }
                     else if( SelectedChecker is OddEvenChecker )
                     {
-                        bool result = SelectedChecker.Validate( text );
-                        TextBlockMessage = OddEvenResult( result );
+                        Regex reg = new Regex( "^[0-9]+$" );
+                        if( reg.IsMatch(text.TrimStart()))
+                        {
+                            bool result = SelectedChecker.Validate( text );
+                            TextBlockMessage = OddEvenResult( result );
+                        }
+                        else
+                        {
+                            TextBlockMessage = "Ungültige Angabe";
+                        }
                     }
                 }
                 else
@@ -100,22 +110,22 @@
         {
             if( result == true )
             {
-                return text + "\nist ein Palindrome";
+                return "Palindrome";
             }
             else
             {
-                return text + "\nist kein Palindrome";
+                return "Kein Palindrome";
             }
         }
         public string OddEvenResult( bool result )
         {
             if( result == true )
             {
-                return text + " ist eine gerade Zahl";
+                return "Gerade Zahl";
             }
             else
             {
-                return text + " ist eine ungerade Zahl";
+                return "Ungerade Zahl";
             }
         }
 
