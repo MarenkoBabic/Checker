@@ -1,4 +1,4 @@
-﻿namespace Checkers
+﻿namespace Checkers.ViewModels
 {
     /// <summary>
     /// Interface für StringValidierungen

@@ -1,7 +1,8 @@
-﻿namespace Checkers
+﻿namespace Checkers.ViewModels
 {
+    using Caliburn.Micro;
     using System.Text.RegularExpressions;
-    public class PalindromeChecker : IChecker
+    public class PalindromeChecker :IChecker
     {
         bool IChecker.Validate( string value )
         {

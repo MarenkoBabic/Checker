@@ -1,11 +1,11 @@
-﻿namespace Checkers
+﻿namespace Checkers.ViewModels
 {
     using System;
     using System.Text.RegularExpressions;
 
     public class OddEvenChecker : ViewModelBase, IChecker
     {
-        public bool Validate( string value )
+        bool IChecker.Validate( string value )
         {
             if( value != null)
             {

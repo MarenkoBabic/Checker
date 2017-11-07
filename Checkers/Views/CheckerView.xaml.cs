@@ -1,6 +1,8 @@
-﻿using System.Windows.Controls;
-namespace Checkers
+﻿namespace Checkers.Views
 {
+    using System.Windows.Controls;
+    using Checkers.ViewModels;
+
     /// <summary>
     /// Interaction logic for CheckerView.xaml
     /// </summary>

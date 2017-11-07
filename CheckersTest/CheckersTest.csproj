@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="OddEvenCheckerTest.cs" />
     <Compile Include="PalidromeCheckerTest.cs" />
+    <Compile Include="PrimZahlCheckerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

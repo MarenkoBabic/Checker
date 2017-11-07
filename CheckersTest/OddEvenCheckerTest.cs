@@ -1,5 +1,6 @@
 ﻿namespace CheckersTest
 {
+    using Checkers.ViewModels;
     using Xunit;
     public class OddEvenCheckerTest
     {
@@ -7,7 +8,7 @@
         public void OddEvenTheStringIsOnlyNumbers_ReturnTrue()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+            IChecker checker = new OddEvenChecker();
 
             //Act
             bool isOnlyNumbersAndEven = checker.Validate( "1234567890" );
@@ -20,7 +21,7 @@
         public void OddEvenTheStringIsOnlyNumbersAndOdd_ReturnFalse()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+             IChecker checker = new  OddEvenChecker();
 
             //Act
             bool isOnlyNumbersAndOdd = checker.Validate( "1234567" );
@@ -33,7 +34,7 @@
         public void OddEvenTheStringIsEven_ReturnTrue()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+             IChecker checker = new  OddEvenChecker();
 
             //Act
             bool isEven = checker.Validate( "100" );
@@ -46,7 +47,7 @@
         public void OddEvenTheStringIsOdd_ReturnFalse()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+             IChecker checker = new  OddEvenChecker();
 
             //Act
             bool isOdd = checker.Validate( "99" );
@@ -59,7 +60,7 @@
         public void OddEvenTheStringIsNotOnlyNumbers_ReturnTrue()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+             IChecker checker = new  OddEvenChecker();
 
             //Act
             bool isOnlyNumbers = checker.Validate( "12ab34cd" );
@@ -72,7 +73,7 @@
         public void OddEvenTheStringIsNull_ReturnFalse()
         {
             //Arrange
-            Checkers.IChecker checker = new Checkers.OddEvenChecker();
+             IChecker checker = new  OddEvenChecker();
 
             //Act
             bool isNull = checker.Validate( null );

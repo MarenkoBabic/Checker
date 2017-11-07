@@ -1,11 +1,12 @@
-﻿namespace Checkers
+﻿namespace Checkers.ViewModels
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Text.RegularExpressions;
+    using System.Windows.Controls;
     using Caliburn.Micro;
-    using Checkers.ViewModels;
 
-    public class CheckerViewModel : ViewModelBase, IHaveDisplayName
+    public class CheckerViewModel : ViewModelBase, IHaveDisplayName,IShell
     {
         #region propertys
         public string DisplayName
@@ -43,30 +44,19 @@
                 OnPropertyChanged( Text );
             }
         }
-        public List<IChecker> CheckerAuswahl
-        {
-            get;
-            private set;
-        }
         public IChecker SelectedChecker
         {
             get;
             set;
         }
-        #endregion
+        public List<IChecker> CheckerAuswahl { get; set; }
 
+        #endregion
         public CheckerViewModel()
         {
-            this.checker = new List<IChecker>();
-            {
-                new PalindromeChecker(),new OddEvenChecker();new PrimzahlChecker();
-            }
-            CheckerAuswahl = checker;
+            CheckerAuswahl = new List<IChecker>() { new PalindromeChecker(), new OddEvenChecker(), new PrimzahlChecker() };
         }
 
-        /// <summary>
-        /// Funktion beim betätigen vom Button 
-        /// </summary>
         public void CheckButton()
         {
             // Prüft ob Checker ausgewählt ist
@@ -123,8 +113,6 @@
                     TextBlockMessage = "Ungültige Angabe";
                 }
             }
-
-
         }
 
         #region Result
@@ -161,14 +149,10 @@
                 return "Keine Primzahl";
             }
         }
-
         #endregion
-
-
 
         private string displayName = "CHECKERS";
         private string textBlockMessage;
         private string text;
-        private List<IChecker> checker;
     }
 }

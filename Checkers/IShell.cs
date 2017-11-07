@@ -1,6 +1,6 @@
 ﻿namespace Checkers
 {
-    public class Result
+    public interface IShell
     {
     }
 }

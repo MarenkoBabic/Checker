@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Checkers
+namespace Checkers.ViewModels
 {
     public class PrimzahlChecker : ViewModelBase, IChecker
     {
-        public bool Validate( string value )
+        bool IChecker.Validate(string value)
         {
             if( value != null )
             {
