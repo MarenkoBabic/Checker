@@ -1,54 +1,57 @@
-﻿
-namespace Checkers
+﻿namespace Checkers
 {
     using System;
     using System.Collections.Generic;
+    using System.Windows;
     using Caliburn.Micro;
     using Checkers.ViewModels;
+
     public class Bootstrapper : BootstrapperBase
     {
-
-
+        public List<IChecker> ListChecker { get; set; }
         public Bootstrapper()
         {
             Initialize();
+            ListChecker = new List<IChecker> { new PalindromeChecker(), new OddEvenChecker(), new PrimzahlChecker() };
         }
 
-        protected override void Configure()
+        //protected override void Configure()
+        //{
+        //    container = new SimpleContainer();
+
+        //    container.Singleton<IWindowManager, WindowManager>();
+
+        //    container.Singleton<IShell, CheckerViewModel>();
+        //    container.PerRequest<IChecker, PalindromeChecker>();
+        //    container.PerRequest<IChecker, OddEvenChecker>();
+        //    container.PerRequest<IChecker, PrimzahlChecker>();
+        //}
+
+        protected override void OnStartup( object sender, StartupEventArgs e )
         {
-            container = new SimpleContainer();
+            var settings = new Dictionary<string, object>() 
+            {
+                {"MinHeight",700 },{"MinWidth",1000 }
+            };
 
-            container.Singleton<IWindowManager, WindowManager>();
-            container.Singleton<IEventAggregator, EventAggregator>();
-            container.PerRequest<IShell, CheckerViewModel>();
-            container.PerRequest<PalindromeChecker, PalindromeChecker>();
+            DisplayRootViewFor<CheckerViewModel>(settings);
         }
 
-        protected override object GetInstance( Type service, string key )
-        {
-            object instance = container.GetInstance( service, key );
-            if( instance != null )
-                return instance;
+        //protected override object GetInstance( Type service, string key )
+        //{
+        //    return container.GetInstance( service, key );
+        //}
 
-            throw new InvalidOperationException( "Could not locate any instances." );
-        }
+        //protected override IEnumerable<object> GetAllInstances( Type service )
+        //{
+        //    return container.GetAllInstances( service );
+        //}
 
-        protected override IEnumerable<object> GetAllInstances( Type service )
-        {
-            return container.GetAllInstances( service );
-        }
+        //protected override void BuildUp( object instance )
+        //{
+        //    container.BuildUp( instance );
+        //}
 
-        protected override void BuildUp( object instance )
-        {
-            container.BuildUp( instance );
-        }
-
-        protected override void OnStartup( object sender, System.Windows.StartupEventArgs e )
-        {
-            Dictionary<string, object> settings = new Dictionary<string, object> { { "MinHeight", 800 }, { "MinWidth", 720 } };
-            DisplayRootViewFor<IShell>(settings);
-        }
-
-        private SimpleContainer container;
+        //private SimpleContainer container;
     }
 }

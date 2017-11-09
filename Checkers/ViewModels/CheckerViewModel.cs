@@ -1,12 +1,12 @@
 ﻿namespace Checkers.ViewModels
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
+    using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Windows.Controls;
+    using System.Threading.Tasks;
     using Caliburn.Micro;
 
-    public class CheckerViewModel : ViewModelBase, IHaveDisplayName,IShell
+    public class CheckerViewModel : ViewModelBase, IHaveDisplayName, IShell
     {
         #region propertys
         public string DisplayName
@@ -18,6 +18,18 @@
             set
             {
                 displayName = value;
+            }
+        }
+        public string TestResults
+        {
+            get
+            {
+                return testResults;
+            }
+            set
+            {
+                testResults = value;
+                OnPropertyChanged( "testResults" );
             }
         }
         public string TextBlockMessage
@@ -50,11 +62,15 @@
             set;
         }
         public List<IChecker> CheckerAuswahl { get; set; }
-
         #endregion
+
         public CheckerViewModel()
         {
-            CheckerAuswahl = new List<IChecker>() { new PalindromeChecker(), new OddEvenChecker(), new PrimzahlChecker() };
+            DisplayName = "Checker";
+            CheckerAuswahl = new List<IChecker>
+            {
+                new PalindromeChecker(),new OddEvenChecker(),new PrimzahlChecker()
+            };
         }
 
         public void CheckButton()
@@ -80,10 +96,12 @@
 
         public void Checker()
         {
+            List<string> ResultList = new List<string>();
+
             if( SelectedChecker is PalindromeChecker )
             {
                 bool result = SelectedChecker.Validate( Text );
-                TextBlockMessage = PalindromeResult( result );
+                ResultList.Add( Text + " " + PalindromeResult( result ) );
             }
             else if( SelectedChecker is OddEvenChecker )
             {
@@ -92,7 +110,7 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool result = SelectedChecker.Validate( Text );
-                    TextBlockMessage = OddEvenResult( result );
+                    ResultList.Add( Text + " " + OddEvenResult( result ) );
                 }
                 else
                 {
@@ -106,13 +124,14 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool result = SelectedChecker.Validate( Text );
-                    TextBlockMessage = PrimzahlResult( result );
+                    ResultList.Add( text + " " + PrimzahlResult(result) );
                 }
                 else
                 {
                     TextBlockMessage = "Ungültige Angabe";
                 }
             }
+            TextResult( ResultList );
         }
 
         #region Result
@@ -120,39 +139,47 @@
         {
             if( result )
             {
-                return "Palindrome";
+                return " ist ein Palindrome";
             }
             else
             {
-                return "Kein Palindrome";
+                return "ist kein Palindrome";
             }
         }
         public string OddEvenResult( bool result )
         {
-            if( result == true )
+            if( result )
             {
-                return "Gerade Zahl";
+                return "ist eine gerade Zahl";
             }
             else
             {
-                return "Ungerade Zahl";
+                return "ist eine ungerade Zahl";
             }
         }
         public string PrimzahlResult( bool result )
         {
-            if( result == true )
+            if( result )
             {
-                return "Primzahl";
+                return "ist eine Primzahl";
             }
             else
             {
-                return "Keine Primzahl";
+                return "ist keine Primzahl";
             }
         }
         #endregion
 
-        private string displayName = "CHECKERS";
+        public void TextResult( List<string> Result )
+        {
+            foreach( string item in Result)
+            {
+                TestResults += item + ",\t";
+            }
+        }
+        private string displayName;
         private string textBlockMessage;
         private string text;
+        private string testResults;
     }
 }
