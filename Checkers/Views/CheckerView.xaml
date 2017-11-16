@@ -4,10 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
-             mc:Ignorable="d" Width="1016" Background="Black">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-        </StackPanel>
-    </StackPanel>
+             mc:Ignorable="d" Background="Black" Width="800" Height="500">
+    <Grid Margin="10">
 
+        <TextBlock 
+            Text="{Binding ErrorMessage}"
+            Foreground="White" 
+            Background="#FF575454"
+            Margin="10,10,270,420"
+            TextAlignment="Center"
+            FontSize="20">
+        </TextBlock>
+
+        <ComboBox
+            ItemsSource="{Binding CheckerAuswahl}"
+            SelectedItem="SelectedChecker"
+            Foreground="White"
+            Background="#FF575454"
+            Margin="570,10,10,420" BorderBrush="#FF2E2E2E"/>
+
+        <TextBox 
+            Text="{Binding Text}" 
+            Foreground="White"
+            Background="#FF575454"
+            TextAlignment="Center"
+            Margin="10,75,270,211"/>
+
+        <TextBlock 
+            Text="{Binding TextResult}"
+            Foreground="White"
+            Background="#FF575454"
+            Margin="10,301,10,10"
+            />
+
+        <Button x:Name="CheckButton"
+                Background="#FF575454"
+                Margin="570,219,10,211"
+                Content="Testen"/>
+
+        <Label 
+            Content="Ergebnisse"
+            Foreground="White" Margin="10,274,702,179"/>
+
+
+
+
+    </Grid>
 </UserControl>

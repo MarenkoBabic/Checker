@@ -31,7 +31,7 @@
         {
             var settings = new Dictionary<string, object>() 
             {
-                {"MinHeight",700 },{"MinWidth",1000 }
+                {"MinHeight",500 },{"MinWidth",800 }
             };
 
             DisplayRootViewFor<CheckerViewModel>(settings);

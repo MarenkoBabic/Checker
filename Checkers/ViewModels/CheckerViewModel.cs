@@ -32,16 +32,16 @@
                 OnPropertyChanged( "testResults" );
             }
         }
-        public string TextBlockMessage
+        public string ErrorMessage
         {
             get
             {
-                return textBlockMessage;
+                return errorMessage;
             }
             set
             {
-                textBlockMessage = value;
-                OnPropertyChanged( "textBlockMessage" );
+                errorMessage = value;
+                OnPropertyChanged( "errorMessage" );
             }
         }
         public string Text
@@ -85,12 +85,12 @@
                 }
                 else
                 {
-                    TextBlockMessage = "Text eingeben";
+                    ErrorMessage = "Text eingeben";
                 }
             }
             else
             {
-                TextBlockMessage = "Checker auswählen";
+                ErrorMessage = "Checker auswählen";
             }
         }
 
@@ -114,7 +114,7 @@
                 }
                 else
                 {
-                    TextBlockMessage = "Ungültige Angabe";
+                    ErrorMessage = "Ungültige Angabe";
                 }
             }
             else if( SelectedChecker is PrimzahlChecker )
@@ -128,7 +128,7 @@
                 }
                 else
                 {
-                    TextBlockMessage = "Ungültige Angabe";
+                    ErrorMessage = "Ungültige Angabe";
                 }
             }
             TextResult( ResultList );
@@ -178,7 +178,7 @@
             }
         }
         private string displayName;
-        private string textBlockMessage;
+        private string errorMessage;
         private string text;
         private string testResults;
     }
