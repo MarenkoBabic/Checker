@@ -5,29 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
              mc:Ignorable="d" 
-             Width="820.5" Height="579.5" Background="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-    <Grid Margin="18,26,9,7" RenderTransformOrigin="0.5,0.5">
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="0.016"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-
-        <Grid Height="Auto" Width="Auto" Margin="0,0,375,0">
-            <Label Content="Anzahl Personen" Foreground="White" Margin="10,10,199,454" Height="27"/>
-            <TextBox Width="200" Margin="12,87,206,375" Text="{Binding Input}"/>
-            <Button x:Name="Generator" Content="Generieren" Margin="227,87,0,375"/>
-            <TextBlock Text="{Binding TextBlockPersons}" Background="#FF575454" Margin="-16,105,399,458"/>
+             Width="928.5" Height="710" Background="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+    <Grid Margin="0,0,0,10">
+        <Grid Height="571" Width="377" Margin="0,0,382,0">
+            <Label Content="Anzahl Personen" Foreground="White" Margin="10,1,199,553" Height="27"/>
+            <TextBox Width="200" Margin="0,33,218,498" Text="{Binding Input}"/>
+            <Button x:Name="Generator" Content="Generieren" Margin="227,33,10,498"/>
+            <TextBlock Text="{Binding TextBlockPersons}" Background="#FF575454" Margin="0,114,0,0"/>
         </Grid>
 
-        <Grid Height="Auto" Width="364" Margin="420,8,10,18" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Filtern" Foreground="White" Margin="10,10,167,453" Height="28"/>
-            <TextBox Margin="0,43,177,396"  Text="{Binding InputFilter}"/>
-            <Button x:Name="Filter" Content="Filtern" Margin="202,43,0,396" />
-            <TextBlock Background="#FF575454" Margin="0,134,0,-17" Text="{Binding PersonFilter}" Padding="10">
+        <Grid Height="571" Width="377" Margin="423,10,0,0">
+            <Label Content="Filtern" Foreground="White" Margin="0,0,177,543" Height="28"/>
+            <TextBox Margin="-3,28,180,497"  Text="{Binding InputFilter}"/>
+            <Button x:Name="Filter" Content="Filtern" Margin="202,28,0,497" />
+            <TextBlock Background="#FF575454" Margin="0,99,0,0" Text="{Binding PersonFilter}" Padding="10">
             </TextBlock>
         </Grid>
 
