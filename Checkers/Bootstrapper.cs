@@ -20,26 +20,28 @@
         //    container = new SimpleContainer();
 
         //    container.Singleton<IWindowManager, WindowManager>();
+        //    container.Singleton<IEventAggregator, EventAggregator>();
 
-        //    container.Singleton<IShell, CheckerViewModel>();
-        //    container.PerRequest<IChecker, PalindromeChecker>();
-        //    container.PerRequest<IChecker, OddEvenChecker>();
-        //    container.PerRequest<IChecker, PrimzahlChecker>();
+        //    container.Singleton<IShell, ShellViewModel>();
         //}
 
         protected override void OnStartup( object sender, StartupEventArgs e )
         {
-            var settings = new Dictionary<string, object>() 
+            var settings = new Dictionary<string, object>()
             {
                 {"MinHeight",500 },{"MinWidth",800 }
             };
 
-            DisplayRootViewFor<CheckerViewModel>(settings);
+            DisplayRootViewFor<ShellViewModel>( settings );
         }
 
         //protected override object GetInstance( Type service, string key )
         //{
-        //    return container.GetInstance( service, key );
+        //    var instance = container.GetInstance( service, key );
+        //    if( instance != null )
+        //        return instance;
+
+        //    throw new Exception( "Could not locate any instances." );
         //}
 
         //protected override IEnumerable<object> GetAllInstances( Type service )

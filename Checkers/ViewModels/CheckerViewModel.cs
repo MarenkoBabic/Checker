@@ -63,7 +63,6 @@
         }
         public List<IChecker> CheckerAuswahl { get; set; }
         #endregion
-
         public CheckerViewModel()
         {
             DisplayName = "Checker";

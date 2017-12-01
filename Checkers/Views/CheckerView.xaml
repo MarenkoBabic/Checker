@@ -4,24 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
-             mc:Ignorable="d" Background="Black" Width="800" Height="500">
+             mc:Ignorable="d" Width="800" Height="500" Background="Black">
+    
     <Grid Margin="10">
 
-        <TextBlock 
+        <TextBlock
             Text="{Binding ErrorMessage}"
             Foreground="White" 
             Background="#FF575454"
             Margin="10,10,270,420"
             TextAlignment="Center"
-            FontSize="20">
-        </TextBlock>
+            FontSize="20"/>
 
-        <ComboBox
-            ItemsSource="{Binding CheckerAuswahl}"
-            SelectedItem="SelectedChecker"
-            Foreground="White"
-            Background="#FF575454"
-            Margin="570,10,10,420" BorderBrush="#FF2E2E2E"/>
+        <ComboBox Margin="528,10,10,420" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}" Background="#FF575454">
+            <ComboBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#FF575454"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.DesktopBrushKey}" Color="Green"/>
+
+
+            </ComboBox.Resources>
+        </ComboBox>
 
         <TextBox 
             Text="{Binding Text}" 
@@ -31,23 +33,21 @@
             Margin="10,75,270,211"/>
 
         <TextBlock 
-            Text="{Binding TextResult}"
+            Text="{Binding TestResults}"
             Foreground="White"
             Background="#FF575454"
-            Margin="10,301,10,10"
-            />
+            Margin="10,301,10,10"/>
 
         <Button x:Name="CheckButton"
                 Background="#FF575454"
-                Margin="570,219,10,211"
+                Margin="528,219,10,211"
+                Foreground="White"
                 Content="Testen"/>
 
         <Label 
             Content="Ergebnisse"
-            Foreground="White" Margin="10,274,702,179"/>
-
-
-
+            Foreground="White"
+            Margin="10,274,702,179"/>
 
     </Grid>
 </UserControl>

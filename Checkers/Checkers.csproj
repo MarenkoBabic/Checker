@@ -78,12 +78,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IShell.cs" />
+    <Compile Include="ViewModels\PersonGeneratorViewModel.cs" />
+    <Compile Include="ViewModels\RandomPerson.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
       <DependentUpon>CheckerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CheckerViewModel.cs" />
     <Compile Include="ViewModels\PrimzahlChecker.cs" />
     <Compile Include="ViewModelBase.cs" />
+    <Compile Include="Views\PersonGeneratorView.xaml.cs">
+      <DependentUpon>PersonGeneratorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
@@ -118,6 +127,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CheckerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonGeneratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
