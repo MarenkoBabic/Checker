@@ -7,7 +7,7 @@
              mc:Ignorable="d" Margin="10" Background="Black">
 
     <Grid Margin="10" MinHeight="500" MinWidth="600">
-        <Grid Margin="0,0,251,0">
+        <Grid Margin="0,0,286,0">
             <Label                
                 Content="Personen generieren"
                 VerticalAlignment="Top"
@@ -17,20 +17,24 @@
                 VerticalAlignment="Top"
                 Width="200"
                 HorizontalAlignment="Left"
-                Margin="0,26,0,0"/>
+                Margin="0,26,0,0"
+                Text="{Binding Input }"/>
             <Button
                 Height="50"
                 Content="Generieren"
                 Margin="200,26,0,0"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Width="150"/>
+                Width="150"
+                x:Name="Generator"/>
             <TextBlock 
                 Background="#FF575454"
-                Margin="0,81,0,10"/>
+                Margin="0,81,0,10"
+                TextWrapping="Wrap"
+                Text="{Binding PersonList}"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Right" Width="246">
+        <Grid HorizontalAlignment="Right">
             <Label 
                 Content="Filtern" 
                 Foreground="White"
@@ -42,17 +46,22 @@
                 Height="50"
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Right" 
-                Width="180" Margin="0,26,66,0"/>
+                Width="180" Margin="0,26,101,0"
+                Text="{Binding InputFilter}"/>
 
             <Button 
+                x:Name="Filter"
                 Content="Filtern"
                 Height="50"
-                Width="66"
-                Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                Width="96"
+                Margin="0,26,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"/>
             <TextBlock
                 Background="#FF575454"
                 Margin="0,81,0,10"
-                Width="Auto"/>
+                TextWrapping="Wrap"
+                Text="{Binding PersonFilter}"/>
         </Grid>
 
     </Grid>

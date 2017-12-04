@@ -71,7 +71,7 @@
                 new PalindromeChecker(),new OddEvenChecker(),new PrimzahlChecker()
             };
         }
-
+        int count = 0;
         public void CheckButton()
         {
             // Prüft ob Checker ausgewählt ist
@@ -80,7 +80,8 @@
                 // Prüft ob Text vorhanden ist
                 if( !string.IsNullOrWhiteSpace( Text ) )
                 {
-                    Checker();
+                    count++;
+                    Checker(count);
                 }
                 else
                 {
@@ -93,7 +94,7 @@
             }
         }
 
-        public void Checker()
+        public void Checker(int count)
         {
             List<string> ResultList = new List<string>();
 
@@ -130,7 +131,7 @@
                     ErrorMessage = "Ungültige Angabe";
                 }
             }
-            TextResult( ResultList );
+            TextResult( ResultList,count );
         }
 
         #region Result
@@ -169,7 +170,7 @@
         }
         #endregion
 
-        public void TextResult( List<string> Result )
+        public void TextResult( List<string> Result, int count )
         {
             foreach( string item in Result)
             {

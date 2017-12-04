@@ -34,16 +34,16 @@ namespace Checkers.ViewModels
             }
         }
 
-        public string TextBlockPersons
+        public string PersonList
         {
             get
             {
-                return textBlockPersons;
+                return personList;
             }
             set
             {
-                textBlockPersons = value;
-                OnPropertyChanged( "TextBlockPersons" );
+                personList = value;
+                OnPropertyChanged( "PersonList" );
             }
         }
 
@@ -72,7 +72,7 @@ namespace Checkers.ViewModels
             rn.PersonGenerator( Input );
             foreach( string person in rn.PersonList )
             {
-                TextBlockPersons += person + "\n";
+                PersonList += person + "\n";
             }
         }
 
@@ -89,7 +89,7 @@ namespace Checkers.ViewModels
 
 
         private string personFilter;
-        private string textBlockPersons;
+        private string personList;
         private string input;
         private string inputFilter;
     }

@@ -40,7 +40,8 @@
             TextAlignment="Center"
             Margin="10,76,270,0"
             VerticalAlignment="Top"
-            MinHeight="193"/>
+            MinHeight="193"
+            TextWrapping="Wrap"/>
         <Button x:Name="CheckButton"
                 Background="#FF575454"
                 Margin="0,219,10,0"
@@ -57,7 +58,8 @@
             Text="{Binding TestResults}"
             Foreground="White"
             Background="#FF575454"
-            Margin="10,301,10,10"/>
+            Margin="10,301,10,10"
+            TextWrapping="Wrap"/>
 
     </Grid>
 </UserControl>

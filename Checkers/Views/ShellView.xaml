@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
              mc:Ignorable="d" Background="#FF535151">
-    <Grid>
+    <Grid Margin="10">
         <Grid>
             <Button Name="Checker" Content="Checker" Width="200" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top"/>
             <Button Name="PersonGenerator" Content="Person Generator" Width="200" Height="50" HorizontalAlignment="Left" Margin="0,50,0,-50" VerticalAlignment="Top"/>
