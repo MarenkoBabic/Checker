@@ -4,19 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
-             mc:Ignorable="d" Width="800" Height="500" Background="Black">
-    
+             mc:Ignorable="d" Background="Black">
+
     <Grid Margin="10">
 
         <TextBlock
             Text="{Binding ErrorMessage}"
             Foreground="White" 
             Background="#FF575454"
-            Margin="10,10,270,420"
+            Margin="10,10,270,0"
             TextAlignment="Center"
-            FontSize="20"/>
-
-        <ComboBox Margin="528,10,10,420" ItemsSource="{Binding CheckerAuswahl}" SelectedItem="{Binding SelectedChecker}" Background="#FF575454">
+            FontSize="20"
+            VerticalAlignment="Top"
+            Height="50"/>
+        <ComboBox
+            Margin="0,10,10,0"
+            ItemsSource="{Binding CheckerAuswahl}"
+            SelectedItem="{Binding SelectedChecker}"
+            Background="#FF575454"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Height="50"
+            Width="250">
             <ComboBox.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#FF575454"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.DesktopBrushKey}" Color="Green"/>
@@ -24,30 +33,31 @@
 
             </ComboBox.Resources>
         </ComboBox>
-
         <TextBox 
             Text="{Binding Text}" 
             Foreground="White"
             Background="#FF575454"
             TextAlignment="Center"
-            Margin="10,75,270,211"/>
-
+            Margin="10,76,270,0"
+            VerticalAlignment="Top"
+            MinHeight="193"/>
+        <Button x:Name="CheckButton"
+                Background="#FF575454"
+                Margin="0,219,10,0"
+                Foreground="White"
+                Content="Testen"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Height="50" Width="250"/>
+        <Label 
+            Content="Ergebnisse"
+            Foreground="White"
+            Margin="10,274,702,179"/>
         <TextBlock 
             Text="{Binding TestResults}"
             Foreground="White"
             Background="#FF575454"
             Margin="10,301,10,10"/>
-
-        <Button x:Name="CheckButton"
-                Background="#FF575454"
-                Margin="528,219,10,211"
-                Foreground="White"
-                Content="Testen"/>
-
-        <Label 
-            Content="Ergebnisse"
-            Foreground="White"
-            Margin="10,274,702,179"/>
 
     </Grid>
 </UserControl>

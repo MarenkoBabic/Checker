@@ -29,7 +29,7 @@
         {
             var settings = new Dictionary<string, object>()
             {
-                {"MinHeight",500 },{"MinWidth",800 }
+                {"MinHeight",800 },{"MinWidth",1000 }
             };
 
             DisplayRootViewFor<ShellViewModel>( settings );
