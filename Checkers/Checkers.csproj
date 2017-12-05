@@ -78,14 +78,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IShell.cs" />
-    <Compile Include="ViewModels\PersonGeneratorViewModel.cs" />
-    <Compile Include="ViewModels\RandomPerson.cs" />
+    <Compile Include="ViewModels\PersonGenerator\HairColor.cs" />
+    <Compile Include="ViewModels\PersonGenerator\Person.cs" />
+    <Compile Include="ViewModels\PersonGenerator\PersonGeneratorViewModel.cs" />
+    <Compile Include="ViewModels\PersonGenerator\RandomPerson.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
       <DependentUpon>CheckerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CheckerViewModel.cs" />
-    <Compile Include="ViewModels\PrimzahlChecker.cs" />
+    <Compile Include="ViewModels\Checker\CheckerViewModel.cs" />
+    <Compile Include="ViewModels\Checker\PrimzahlChecker.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Views\PersonGeneratorView.xaml.cs">
       <DependentUpon>PersonGeneratorView.xaml</DependentUpon>
@@ -96,9 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ViewModels\ICheckerViewModel.cs" />
-    <Compile Include="ViewModels\OddEvenChecker.cs" />
-    <Compile Include="ViewModels\PalindromeChecker.cs" />
+    <Compile Include="ViewModels\Checker\ICheckerViewModel.cs" />
+    <Compile Include="ViewModels\Checker\OddEvenChecker.cs" />
+    <Compile Include="ViewModels\Checker\PalindromeChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -4,65 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
-             mc:Ignorable="d" Margin="10" Background="Black">
+             mc:Ignorable="d" Margin="10" Background="Black" d:DesignWidth="633" d:DesignHeight="600">
 
-    <Grid Margin="10" MinHeight="500" MinWidth="600">
-        <Grid Margin="0,0,286,0">
-            <Label                
-                Content="Personen generieren"
-                VerticalAlignment="Top"
-                Foreground="White"/>
+    <Grid Margin="10" MinHeight="582" MinWidth="504">
+
+        <Grid Margin="0,0,0,312">
             <TextBox 
-                Height="50"
+                Height="45"
                 VerticalAlignment="Top"
-                Width="200"
                 HorizontalAlignment="Left"
-                Margin="0,26,0,0"
-                Text="{Binding Input }"/>
+                Text="{Binding Input,Mode=TwoWay}"
+                Width="214"
+                Margin="10,10,0,0"/>
             <Button
-                Height="50"
                 Content="Generieren"
-                Margin="200,26,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Width="150"
-                x:Name="Generator"/>
+                x:Name="Generator"
+                 Margin="224,10,178,301"
+                Width="200" Height="45"
+                HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBlock 
                 Background="#FF575454"
-                Margin="0,81,0,10"
-                TextWrapping="Wrap"
-                Text="{Binding PersonList}"/>
+                TextWrapping="WrapWithOverflow"
+                Text="{Binding PersonList}"
+                Margin="10,60,0,0"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Right">
-            <Label 
-                Content="Filtern" 
-                Foreground="White"
-                Margin="10,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"/>
+        <Grid VerticalAlignment="Bottom" Height="290">
+            <Label Content="Vorname" Foreground="White" Margin="10,0,325,172"/>
             <TextBox 
-                Height="50"
+                Height="30"
                 VerticalAlignment="Top" 
-                HorizontalAlignment="Right" 
-                Width="180" Margin="0,26,101,0"
-                Text="{Binding InputFilter}"/>
+                HorizontalAlignment="Left" 
+                Text="{Binding FirstName,TargetNullValue='Vorname'}" Width="101" Margin="10,35,0,0"/>
 
             <Button 
                 x:Name="Filter"
                 Content="Filtern"
-                Height="50"
-                Width="96"
-                Margin="0,26,0,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"/>
+                Height="30"
+                Width="113"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" Margin="434,35,0,0"/>
             <TextBlock
                 Background="#FF575454"
-                Margin="0,81,0,10"
                 TextWrapping="Wrap"
-                Text="{Binding PersonFilter}"/>
+                Text="{Binding FilterList}" Margin="10,68,4,0"/>
+            <TextBox 
+                Height="30"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Text="{Binding LastName}" Width="101" Margin="116,35,0,0"/>
+            <TextBox 
+                Height="30"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Text="{Binding BirthDay}" Width="101" Margin="222,35,0,0"/>
+            <TextBox 
+                Height="30"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Text="{Binding HairColor}" Width="101" Margin="328,35,0,0"/>
+            <Label Foreground="White" Margin="116,0,219,172"/>
+            <Label Content="Nachname" Foreground="White" Margin="116,0,219,172"/>
+            <Label Content="Geburtsdatum" Foreground="White" Margin="222,0,113,172"/>
+            <Label Content="Haarfarbe" Foreground="White" Margin="328,0,81,219"/>
         </Grid>
-
     </Grid>
 </UserControl>
