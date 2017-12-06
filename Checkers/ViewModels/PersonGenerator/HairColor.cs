@@ -1,4 +1,4 @@
-﻿enum HairColor {
+﻿public enum HairColor {
     Rot,
     Blau,
     Grün,

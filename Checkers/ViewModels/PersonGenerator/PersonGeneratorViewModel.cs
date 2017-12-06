@@ -2,15 +2,12 @@
 namespace Checkers.ViewModels
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Windows;
     using Checkers.ViewModels.PersonGenerator;
 
-    class PersonGeneratorViewModel : ViewModelBase, IShell
+    public class PersonGeneratorViewModel : ViewModelBase, IShell
     {
-        #region propertys
+        PersonelManagement pm = new PersonelManagement();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? BirthDay { get; set; }
@@ -52,78 +49,67 @@ namespace Checkers.ViewModels
             }
         }
 
-        #endregion
-        RandomPerson rn = new RandomPerson();
-
         public void Generator()
         {
-            rn.ListPerson.Clear();
+            pm.ListPerson.Clear();
             Regex reg = new Regex( "^[0-9]+$" );
-            if( !string.IsNullOrEmpty( input ) )
+            //Prüfe ob eingabe Null oder Zahlen sind
+            if( !string.IsNullOrEmpty( input ) && reg.IsMatch( input) )
             {
-                if( reg.IsMatch( input.TrimStart() ) )
+                bool result = int.TryParse( input, out int number );
+                if( number != 0 && number < 10000 )
                 {
-                    bool result = int.TryParse( input, out int number );
-                    if( number != 0 )
+                    PersonList = null;
+                    pm.PersonGenerator( number );
+                    foreach( Person item in pm.ListPerson )
                     {
-                        PersonList = null;
-                        if( true )
-                        {
-
-                        }
-                        rn.PersonGenerator( number );
-                        foreach( Person item in rn.ListPerson )
-                        {
-                            PersonList += item;
-                        }
+                        PersonList += item;
                     }
-                    else
-                    {
-                        PersonList = "Max Zahl 2.147.483.647";
-                    }
+                }
+                else
+                {
+                    PersonList = "Max Zahl 9999";
                 }
             }
             else
             {
                 PersonList = "Zahl eingeben";
             }
-
         }
 
         public void Filter()
         {
             FilterList = null;
-            rn.ListFilterPerson.Clear();
+            pm.ListFilterPerson.Clear();
             if( (!string.IsNullOrEmpty( FirstName ) || !string.IsNullOrEmpty( LastName )) && BirthDay == null && string.IsNullOrEmpty( HairColor ) )
             {
-                rn.SerachPerson( FirstName, LastName );
+                pm.SearchPerson( FirstName, LastName );
             }
             else if( (string.IsNullOrEmpty( FirstName ) && string.IsNullOrEmpty( LastName )) && BirthDay != null && string.IsNullOrEmpty( HairColor ) )
             {
-                rn.SearchDate( BirthDay );
+                pm.SearchDate( BirthDay );
             }
             else if( (string.IsNullOrEmpty( FirstName ) && string.IsNullOrEmpty( LastName )) && BirthDay == null && !string.IsNullOrEmpty( HairColor ) )
             {
-                rn.searchHairColor( HairColor );
+                pm.searchHairColor( HairColor );
             }
             else if( (!string.IsNullOrEmpty( FirstName ) || !string.IsNullOrEmpty( LastName )) && BirthDay != null && string.IsNullOrEmpty( HairColor ) )
             {
-                rn.SearchPersonWithNameAndBirthDay( FirstName, LastName, BirthDay );
+                pm.SearchPersonWithNameAndBirthDay( FirstName, LastName, BirthDay );
             }
             else if( (!string.IsNullOrEmpty( FirstName ) || !string.IsNullOrEmpty( LastName )) && BirthDay == null && !string.IsNullOrEmpty( HairColor ) )
             {
-                rn.SearchPersonWithNameAndHairColor( FirstName, LastName, HairColor );
+                pm.SearchPersonWithNameAndHairColor( FirstName, LastName, HairColor );
             }
             else if( (!string.IsNullOrEmpty( FirstName ) || !string.IsNullOrEmpty( LastName )) && BirthDay != null && string.IsNullOrEmpty( HairColor ) )
             {
-                rn.SearchPersonWithAllInput( FirstName, LastName, BirthDay, HairColor );
+                pm.SearchPersonWithAllInput( FirstName, LastName, BirthDay, HairColor );
             }
-
-            if( rn.ListFilterPerson != null )
+            if( pm.ListFilterPerson.Count > 0 )
             {
-                foreach( Person item in rn.ListFilterPerson )
+                foreach( Person item in pm.ListFilterPerson )
                 {
-                    FilterList += item + "\n";
+                    FilterList += item;
                 }
             }
             else

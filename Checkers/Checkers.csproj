@@ -81,7 +81,7 @@
     <Compile Include="ViewModels\PersonGenerator\HairColor.cs" />
     <Compile Include="ViewModels\PersonGenerator\Person.cs" />
     <Compile Include="ViewModels\PersonGenerator\PersonGeneratorViewModel.cs" />
-    <Compile Include="ViewModels\PersonGenerator\RandomPerson.cs" />
+    <Compile Include="ViewModels\PersonGenerator\PersonelManagement.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
       <DependentUpon>CheckerView.xaml</DependentUpon>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkers.ViewModels.PersonGenerator
 {
-    class Person
+    public class Person
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -23,7 +23,7 @@ namespace Checkers.ViewModels.PersonGenerator
 
         public override string ToString()
         {
-            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay + "\t Haarfarbe: " + HairColor + "\n";
+            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay.ToString("d") + "\t Haarfarbe: " + HairColor + "\n";
         }
     }
 }

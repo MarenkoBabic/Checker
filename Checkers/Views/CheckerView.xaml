@@ -29,8 +29,6 @@
             <ComboBox.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#FF575454"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.DesktopBrushKey}" Color="Green"/>
-
-
             </ComboBox.Resources>
         </ComboBox>
         <TextBox 
@@ -40,11 +38,11 @@
             TextAlignment="Center"
             Margin="10,76,270,0"
             VerticalAlignment="Top"
-            MinHeight="193"
+            Height="200"
             TextWrapping="Wrap"/>
         <Button x:Name="CheckButton"
                 Background="#FF575454"
-                Margin="0,219,10,0"
+                Margin="0,226,10,0"
                 Foreground="White"
                 Content="Testen"
                 HorizontalAlignment="Right"
@@ -54,12 +52,13 @@
             Content="Ergebnisse"
             Foreground="White"
             Margin="10,274,702,179"/>
-        <TextBlock 
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="10,304,10,0">
+            <TextBlock 
             Text="{Binding TestResults}"
             Foreground="White"
             Background="#FF575454"
-            Margin="10,301,10,10"
             TextWrapping="Wrap"/>
+        </ScrollViewer>
 
     </Grid>
 </UserControl>
