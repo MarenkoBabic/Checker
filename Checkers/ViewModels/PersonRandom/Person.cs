@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Checkers.ViewModels.PersonGenerator
+﻿namespace Checkers.ViewModels.PersonRandom
 {
+    using System;
+    using Personalmanagement.Dto;
     public class Person
     {
         public string FirstName { get; set; }
@@ -13,7 +9,7 @@ namespace Checkers.ViewModels.PersonGenerator
         public DateTime BirthDay { get; set; }
         public HairColor HairColor { get; set; }
 
-        public Person(string firstName,string lastName,DateTime birthDay,HairColor hairColor)
+        public Person( string firstName, string lastName, DateTime birthDay, HairColor hairColor )
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -23,7 +19,7 @@ namespace Checkers.ViewModels.PersonGenerator
 
         public override string ToString()
         {
-            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay.ToString("d") + "\t Haarfarbe: " + HairColor + "\n";
+            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay.ToString( "d" ) + "\t Haarfarbe: " + HairColor + "\n";
         }
     }
 }

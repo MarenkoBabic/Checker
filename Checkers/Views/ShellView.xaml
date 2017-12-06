@@ -8,7 +8,7 @@
              mc:Ignorable="d" Background="#FF535151">
     <Grid Margin="10">
         <Button x:Name="Checker" Content="Checker" Width="200" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" IsEnabled="True"/>
-        <Button x:Name="PersonGenerator" Content="Person Generator" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,-50"/>
+        <Button x:Name="PersonRandom" Content="Person Generator" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,-50"/>
         
 
         <ContentControl x:Name="ActiveItem" Margin="223,0,10,10" />

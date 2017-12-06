@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkers", "Checkers\Checke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckersTest", "CheckersTest\CheckersTest.csproj", "{B6DA89C7-1D47-4C91-A1B9-C21034307D23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalGeneratorTest", "PersonalGeneratorTest\PersonalGeneratorTest.csproj", "{0678529C-85D1-4F73-A0F3-3C06F2104594}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0678529C-85D1-4F73-A0F3-3C06F2104594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0678529C-85D1-4F73-A0F3-3C06F2104594}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0678529C-85D1-4F73-A0F3-3C06F2104594}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0678529C-85D1-4F73-A0F3-3C06F2104594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

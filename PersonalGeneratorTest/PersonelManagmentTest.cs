@@ -9,7 +9,7 @@ namespace PersonalGeneratorTest
 
     public class PersonelManagementTest
     {
-        PersonelManagement pm = new PersonelManagement();
+        PersonalManagement pm = new PersonalManagement();
 
         [Fact]
         public void PersonelManagementTest_PersonGeneratorInputIs100000()
@@ -45,7 +45,7 @@ namespace PersonalGeneratorTest
 
             //Act
             pm.PersonGenerator( input );
-            pm.searchHairColor( hairColor );
+            //pm.searchHairColor( hairColor );
 
             //Assert
             Assert.NotNull( pm.ListFilterPerson );
@@ -58,7 +58,7 @@ namespace PersonalGeneratorTest
             int input = 100;
             //Act
             pm.PersonGenerator( input );
-            pm.SearchPerson( firstName, null );
+            //pm.SearchPerson( firstName, null );
 
             //Assert
             Assert.NotNull( pm.ListFilterPerson );
@@ -71,7 +71,7 @@ namespace PersonalGeneratorTest
             int input = 100;
             //Act
             pm.PersonGenerator( input );
-            pm.SearchPerson( null, lastName);
+            //pm.SearchPerson( null, lastName);
 
             //Assert
             Assert.NotNull( pm.ListFilterPerson );
@@ -85,7 +85,7 @@ namespace PersonalGeneratorTest
             List<Person> TestList = new List<Person>();
             //Act
             pm.PersonGenerator( input );
-            pm.SearchDate(birthDay);
+            //pm.SearchDate( birthDay );
             //Assert
             Assert.NotNull(pm.ListFilterPerson);
         }

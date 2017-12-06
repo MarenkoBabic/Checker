@@ -78,10 +78,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IShell.cs" />
-    <Compile Include="ViewModels\PersonGenerator\HairColor.cs" />
-    <Compile Include="ViewModels\PersonGenerator\Person.cs" />
-    <Compile Include="ViewModels\PersonGenerator\PersonGeneratorViewModel.cs" />
-    <Compile Include="ViewModels\PersonGenerator\PersonelManagement.cs" />
+    <Compile Include="ViewModels\PersonRandom\HairColor.cs" />
+    <Compile Include="ViewModels\PersonRandom\Person.cs" />
+    <Compile Include="ViewModels\PersonRandom\PersonRandomViewModel.cs" />
+    <Compile Include="ViewModels\PersonRandom\PersonalManagement.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
       <DependentUpon>CheckerView.xaml</DependentUpon>
@@ -89,8 +89,8 @@
     <Compile Include="ViewModels\Checker\CheckerViewModel.cs" />
     <Compile Include="ViewModels\Checker\PrimzahlChecker.cs" />
     <Compile Include="ViewModelBase.cs" />
-    <Compile Include="Views\PersonGeneratorView.xaml.cs">
-      <DependentUpon>PersonGeneratorView.xaml</DependentUpon>
+    <Compile Include="Views\PersonRandomView.xaml.cs">
+      <DependentUpon>PersonRandomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -132,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PersonGeneratorView.xaml">
+    <Page Include="Views\PersonRandomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

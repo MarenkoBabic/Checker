@@ -17,9 +17,9 @@ namespace Checkers.ViewModels
         {
            ActivateItem( new CheckerViewModel() );
         }
-        public void PersonGenerator()
+        public void PersonRandom()
         {
-            ActivateItem( new PersonGeneratorViewModel() );
+            ActivateItem( new PersonRandomViewModel() );
         }
 
     }
