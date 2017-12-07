@@ -22,10 +22,14 @@
                  Margin="219,44,0,0"
                 Width="200" Height="29"
                 HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <DataGrid
-                x:Name="ListPerson"
-                ItemsSource="{Binding DataGridPersonList}"
-                Margin="0,79,0,0"/>
+            <DataGrid Margin="0,79,0,0" ItemsSource="{Binding PersonList}" AlternatingRowBackground="Gray" AlternationCount="2" AutoGenerateColumns="False">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}" Width="100"/>
+                    <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" Width="100"/>
+                    <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay}" Width="100"/>
+                    <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
 
         <Grid VerticalAlignment="Bottom" Height="290">
@@ -79,8 +83,8 @@
                 HorizontalAlignment="Left" 
                 Width="120"
                 Margin="375,35,0,0"
-                ItemsSource="{Binding HairColor}"
-                SelectedItem="{Binding SelectedItemHairColor}"/>
+                ItemsSource="{Binding Path= HairColorList, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Path=HairColor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button 
                 x:Name="Filter"
@@ -90,8 +94,23 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="500,35,0,0"/>
-            <DataGrid
-                ItemsSource="{Binding DataGridListFilter}" Margin="0,70,0,0"/>
+            <Button 
+                x:Name="CreatePerson"
+                Content="Neue Person"
+                Height="30"
+                Width="113"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="500,5,0,0"/>
+
+            <DataGrid Margin="0,85,0,0" ItemsSource="{Binding ListPersonFiltered}" AlternatingRowBackground="Gray" AlternationCount="2" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}" Width="100"/>
+                    <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" Width="100"/>
+                    <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay}" Width="100"/>
+                    <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
 
     </Grid>

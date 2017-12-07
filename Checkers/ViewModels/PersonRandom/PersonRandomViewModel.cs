@@ -2,42 +2,70 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
 
     public class PersonRandomViewModel : ViewModelBase, IShell
     {
         PersonalManagement personalManager = new PersonalManagement();
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime? BirthDay { get; set; }
-        public HairColor HairColor { get; set; }
-        public List<Person> DataGridPersonList
+        public string FirstName
+        {
+            get;
+            set;
+        }
+        public string LastName
+        {
+            get;
+            set;
+        }
+        public DateTime? BirthDay
+        {
+            get;
+            set;
+        }
+        public HairColor HairColor
         {
             get
             {
-                return dataGridPersonList;
+                return hairColor;
             }
             set
             {
-                dataGridPersonList = value;
-                OnPropertyChanged( nameof( DataGridPersonList ) );
+                hairColor = value;
             }
         }
-
-        public IEnumerable<Person> DataGridListFilter
+        public List<Person> PersonList
         {
             get
             {
-                return dataGridListFilter;
+                return personList;
             }
             set
             {
-                dataGridListFilter = value;
-                OnPropertyChanged( nameof( DataGridListFilter ) );
+                personList = value;
+                OnPropertyChanged(nameof(PersonList));
             }
         }
-
+        public IEnumerable<Person> ListPersonFiltered
+        {
+            get
+            {
+                return listPersonFiltered;
+            }
+            set
+            {
+                listPersonFiltered = value;
+                OnPropertyChanged( nameof( ListPersonFiltered ) );
+            }
+        }
+        public IEnumerable<HairColor> HairColorList
+        {
+            get
+            {
+                return Enum.GetValues( typeof( HairColor ) ).Cast<HairColor>();
+            }
+        }
         public string CountPerson
         {
             get
@@ -50,22 +78,22 @@
             }
         }
 
-        public PersonRandomViewModel()
-        {
-        }
         public void GeneratorRandomPerson()
         {
             bool result = int.TryParse( CountPerson, out int number );
-            this.DataGridPersonList = personalManager.CreateRandomPerson( number );
+            PersonList = new List<Person>( personalManager.CreateRandomPerson( number ) );
         }
-
         public void Filter()
         {
-            this.DataGridListFilter = personalManager.SearchPerson( FirstName, LastName, BirthDay,HairColor.keineAngabe, DataGridPersonList );
+            this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, BirthDay, HairColor, PersonList );
+        }
+        public void CreatePerson()
+        {
+            this.PersonList =new List<Person>( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Now, HairColor ));
         }
         private string countPerson;
-        private List<Person> dataGridPersonList;
-        private IEnumerable<Person> dataGridListFilter;
-
+        private List<Person> personList;
+        private IEnumerable<Person> listPersonFiltered;
+        private HairColor hairColor;
     }
 }

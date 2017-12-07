@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkers", "Checkers\Checke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckersTest", "CheckersTest\CheckersTest.csproj", "{B6DA89C7-1D47-4C91-A1B9-C21034307D23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalManagementTest", "PersonalManagementTest\PersonalManagementTest.csproj", "{7EAB80F3-F2A9-4EF4-B9AB-27914A2D657A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6DA89C7-1D47-4C91-A1B9-C21034307D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EAB80F3-F2A9-4EF4-B9AB-27914A2D657A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EAB80F3-F2A9-4EF4-B9AB-27914A2D657A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EAB80F3-F2A9-4EF4-B9AB-27914A2D657A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EAB80F3-F2A9-4EF4-B9AB-27914A2D657A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

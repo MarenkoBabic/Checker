@@ -2,13 +2,13 @@
 {
    public enum HairColor
     {
-        keineAngabe,
+        KeineAngabe = 0,
         Rot,
         Blau,
         Grün,
         Blond,
         Schwarz,
         Braun,
-        Weiß
+        Weiß,
     }
 }
