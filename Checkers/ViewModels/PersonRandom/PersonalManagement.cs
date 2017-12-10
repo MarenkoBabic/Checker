@@ -60,7 +60,7 @@
         public List<Person> CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
         {
             List<Person> list = new List<Person>();
-            Person person = new Person( firstName, lastName, DateTime.Now, color );
+            Person person = new Person( firstName, lastName,new DateTime(), color );
             list.Add( person );
             return list;
         }

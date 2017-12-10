@@ -89,7 +89,7 @@
         }
         public void CreatePerson()
         {
-            this.PersonList =new List<Person>( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Now, HairColor ));
+            this.PersonList =new List<Person>( personalManager.CreateNewPerson( FirstName, LastName, null, HairColor ));
         }
         private string countPerson;
         private List<Person> personList;

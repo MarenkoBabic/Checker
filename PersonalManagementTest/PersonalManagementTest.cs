@@ -27,10 +27,10 @@
             PersonalManagement personalmanagement = new PersonalManagement();
 
             //Act
-            List<Person> result = personalmanagement.CreateRandomPerson(1000);
+            List<Person> result = personalmanagement.CreateRandomPerson( 1000 );
 
             //Assert
-            Assert.Equal( result.Count,1000);
+            Assert.Equal( result.Count, 1000 );
         }
 
         [Fact]
@@ -38,35 +38,104 @@
         {
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
-
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             //Act
-            List<Person> list = new List<Person>() { new Person( "Marenko", "Babic", DateTime.Now, Personalmanagement.Dto.HairColor.Braun ) };
-            //Person person = new Person( "Marenko", "Babic", DateTime.Now, Personalmanagement.Dto.HairColor.Braun );
-            //list.Add( person );
+            viewModel.PersonList = personalmanagement.CreateNewPerson( "Marenko", "Babic", DateTime.Now, HairColor.Braun );
             //Assert
-            Assert.Collection( list,
-                item => Assert.Equal( "Marenko",item.FirstName),
-                item => Assert.Equal( "Babic",item.LastName));
-        }
-        //        item => Assert.Equal(item.BirthDay, DateTime.Now ),
-        //        item => Assert.Equal(item.HairColor,HairColor.Braun));
-        //}
 
+        }
 
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterAllNull_()
+        public void PersonManagement_SearchPerson_ParameterWithFirstName_ContainsFirstName()
         {
             //Arrange
             PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
-            personalmanagement.CreateNewPerson( "Marenko", "Babic", new DateTime( 13 / 05 / 1986 ), Personalmanagement.Dto.HairColor.Braun );
-
             //Act
-            IEnumerable<Person> filteredList = personalmanagement.SearchPerson(null,null,null, Personalmanagement.Dto.HairColor.KeineAngabe,null);
+            viewModel.PersonList = personalmanagement.CreateNewPerson( "Marenko", null, null, HairColor.KeineAngabe );
+            //Assert
+            Assert.Single( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ) );
+        }
+
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithLastName_ContainsLastName()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( null, "Babic", null, HairColor.KeineAngabe );
+            //Assert
+            Assert.Single( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
+        }
+
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithHairColor_ContainsHairColor()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( null, null, null, HairColor.Braun );
+            //Assert
+            Assert.Single( viewModel.PersonList, item => item.HairColor.Equals( HairColor.Braun ) );
+        }
+
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithBirthDay_ContainsBirthday()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( null, null, new DateTime( 1986, 05, 13 ), HairColor.KeineAngabe );
+            //Assert
+
+        }
+
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithLastNameAndFirstName_ContainsLastNameAndFirstName()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( "Marenko", "Babic", null, HairColor.KeineAngabe );
+            //Assert
+            Assert.Single( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ) );
+            Assert.Single( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
+        }
+
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithLastNameFirstNameBirthDay_ContainsLastNameFirstNameAndBirthDDay()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( "Marenko", "Babic",new DateTime(1986,05,13), HairColor.KeineAngabe );
 
             //Assert
-            //Assert.NotEqual();
+            Assert.Collection( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ) );
+            Assert.Single( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
+            Assert.Single( viewModel.PersonList, item => item.BirthDay.Equals( 19860513 ) );
         }
+        [Fact]
+        public void PersonManagement_SearchPerson_ParameterWithAll_ContainsAll()
+        {
+            //Arrange
+            PersonRandomViewModel viewModel = new PersonRandomViewModel();
+            PersonalManagement personalmanagement = new PersonalManagement();
+            //Act
+            viewModel.PersonList = personalmanagement.CreateNewPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.Braun );
+
+            //Assert
+            Assert.Contains( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ));
+            Assert.Contains( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
+            Assert.Contains( viewModel.PersonList, item => item.BirthDay.Equals( 19860513 ) );
+            Assert.Contains( viewModel.PersonList, item => item.HairColor.Equals( HairColor.Braun ) );
+        }
+
 
     }
 }
