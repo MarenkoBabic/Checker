@@ -57,12 +57,10 @@
             return filteredList;
         }
 
-        public List<Person> CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
+        public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color)
         {
-            List<Person> list = new List<Person>();
-            Person person = new Person( firstName, lastName,new DateTime(), color );
-            list.Add( person );
-            return list;
+            Person person = new Person( firstName, lastName, birthDay, HairColor.KeineAngabe );
+            return person;
         }
         private List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Markus", "Patrick" };
         private List<string> lastNameList = new List<string>() { "Muster", "Pichler", "Eiweck", "Wolfrat", "Raböck", "Russen", "Grewen" };

@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
 
@@ -44,7 +46,7 @@
             set
             {
                 personList = value;
-                OnPropertyChanged(nameof(PersonList));
+                OnPropertyChanged( "PersonList" );
             }
         }
         public IEnumerable<Person> ListPersonFiltered
@@ -77,19 +79,28 @@
                 countPerson = value;
             }
         }
-
+        public ObservableCollection<Person> collection { get; set; }
+        public PersonRandomViewModel()
+        {
+            collection = new ObservableCollection<Person>();
+        }
         public void GeneratorRandomPerson()
         {
+            var list = new List<Person>();
             bool result = int.TryParse( CountPerson, out int number );
-            PersonList = new List<Person>( personalManager.CreateRandomPerson( number ) );
+            list = personalManager.CreateRandomPerson( number );
+            list.ForEach( collection.Add );
+            PersonList = collection.ToList();
         }
         public void Filter()
         {
             this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, BirthDay, HairColor, PersonList );
         }
+
         public void CreatePerson()
         {
-            this.PersonList =new List<Person>( personalManager.CreateNewPerson( FirstName, LastName, null, HairColor ));
+            collection.Add( personalManager.CreateNewPerson( FirstName, LastName, BirthDay, HairColor ) );
+            PersonList = collection.ToList();
         }
         private string countPerson;
         private List<Person> personList;

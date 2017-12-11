@@ -6,10 +6,10 @@
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDay { get; set; }
+        public DateTime? BirthDay { get; set; }
         public HairColor HairColor { get; set; }
 
-        public Person( string firstName, string lastName, DateTime birthDay, HairColor hairColor )
+        public Person( string firstName, string lastName, DateTime? birthDay, HairColor hairColor )
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay.ToString( "d" ) + "\t Haarfarbe: " + HairColor + "\n";
+            return "Vorname: " + FirstName + "\t Nachname: " + LastName + "\t Geburtsdatum: " + BirthDay + "\t Haarfarbe: " + HairColor + "\n";
         }
     }
 }
