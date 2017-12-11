@@ -103,14 +103,21 @@
 
 
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterWithHairColor_ContainsHairColor()
+        public void PersonManagement_CreateNewPersonWith3Parameter_PersonNotNull()
         {
             //Arrange
-            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
+            Person person = new Person( null, null, null, HairColor.KeineAngabe );
+
             //Act
+            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", null, HairColor.Braun );
+
             //Assert
-            Assert.Contains( viewModel.PersonList, item => item.HairColor.Equals( HairColor.Braun ) );
+            Assert.Contains( person.FirstName, "Marenko" );
+            Assert.Contains( person.LastName, "Babic" );
+            Assert.Null( person.BirthDay);
+            Assert.Contains(person.HairColor,HairColor.Braun));
+
         }
 
         [Fact]
