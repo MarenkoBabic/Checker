@@ -3,13 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
     using System.Windows;
+    using System.Xml.Serialization;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
 
     public class PersonRandomViewModel : ViewModelBase, IShell
     {
+        Xml xml = new Xml();
         PersonalManagement personalManager = new PersonalManagement();
         public string FirstName
         {
@@ -80,18 +83,23 @@
             }
         }
         public ObservableCollection<Person> collection { get; set; }
+
         public PersonRandomViewModel()
         {
             collection = new ObservableCollection<Person>();
+            PersonList = xml.DeserializePersonList();
         }
+
         public void GeneratorRandomPerson()
         {
             var list = new List<Person>();
             bool result = int.TryParse( CountPerson, out int number );
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( collection.Add );
+            xml.SerializePersonList( collection.ToList() );
             PersonList = collection.ToList();
         }
+
         public void Filter()
         {
             this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, BirthDay, HairColor, PersonList );
@@ -100,8 +108,16 @@
         public void CreatePerson()
         {
             collection.Add( personalManager.CreateNewPerson( FirstName, LastName, BirthDay, HairColor ) );
+            xml.SerializePersonList( collection.ToList() );
             PersonList = collection.ToList();
         }
+
+        public void DeletePersonList()
+        {
+            xml.RemoveAll();
+            PersonList = null;
+        }
+
         private string countPerson;
         private List<Person> personList;
         private IEnumerable<Person> listPersonFiltered;

@@ -1,6 +1,7 @@
 ﻿namespace Checkers.ViewModels.PersonRandom
 {
     using System;
+    using System.Globalization;
     using Personalmanagement.Dto;
     public class Person
     {
@@ -9,6 +10,8 @@
         public DateTime? BirthDay { get; set; }
         public HairColor HairColor { get; set; }
 
+        public Person()
+        {}
         public Person( string firstName, string lastName, DateTime? birthDay, HairColor hairColor )
         {
             this.FirstName = firstName;

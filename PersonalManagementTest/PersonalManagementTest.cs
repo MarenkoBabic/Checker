@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public void PersonManagement_CreateNewPersonWithFirstName_FirstNameNotNull()
+        public void PersonManagement_CreateNewPersonWith1Parameter_FirstNameNotNull()
         {
             //Arrange
             PersonalManagement personalManagement = new PersonalManagement();
@@ -85,7 +85,7 @@
         }
 
         [Fact]
-        public void PersonManagement_CreateNewPersonWith2Parameter_NotNull()
+        public void PersonManagement_CreateNewPersonWith2Parameter_EqualParameter()
         {
             //Arrange
             PersonalManagement personalManagement = new PersonalManagement();

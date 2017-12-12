@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
@@ -46,7 +47,8 @@
 
                 if( birthDay.HasValue )
                 {
-                    filteredList = filteredList.Where( person => person.BirthDay.Equals( birthDay ) ).ToList();
+
+                    filteredList = filteredList.Where( person => person.BirthDay.Equals( birthDay)).ToList();
                 }
 
                 if( color != HairColor.KeineAngabe )
@@ -57,13 +59,15 @@
             return filteredList;
         }
 
-        public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color)
+        public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
         {
-            Person person = new Person( firstName, lastName, birthDay, color);
+            Person person = new Person( firstName, lastName, birthDay, color );
             return person;
         }
+
         private List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Markus", "Patrick" };
         private List<string> lastNameList = new List<string>() { "Muster", "Pichler", "Eiweck", "Wolfrat", "Raböck", "Russen", "Grewen" };
+
     }
 }
 
