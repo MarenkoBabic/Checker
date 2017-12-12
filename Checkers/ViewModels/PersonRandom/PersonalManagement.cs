@@ -59,7 +59,7 @@
 
         public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color)
         {
-            Person person = new Person( firstName, lastName, birthDay, HairColor.KeineAngabe );
+            Person person = new Person( firstName, lastName, birthDay, color);
             return person;
         }
         private List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Markus", "Patrick" };

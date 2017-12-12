@@ -41,13 +41,13 @@
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
 
             //Act
-            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun );
+            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.Braun );
 
             //Assert
-            Assert.NotNull(person.FirstName);
-            Assert.NotNull( person.LastName);
-            Assert.NotNull(person.BirthDay );
-            Assert.NotNull(person.HairColor );
+            Assert.NotNull( person.FirstName );
+            Assert.NotNull( person.LastName );
+            Assert.NotNull( person.BirthDay );
+            Assert.NotNull( person.HairColor );
         }
 
         [Fact]
@@ -58,7 +58,7 @@
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
 
             //Act
-            person = personalmanagement.CreateNewPerson( null, null, null,HairColor.KeineAngabe);
+            person = personalmanagement.CreateNewPerson( null, null, null, HairColor.KeineAngabe );
 
             //Assert
             Assert.Null( person.FirstName );
@@ -78,7 +78,7 @@
             person = personalManagement.CreateNewPerson( "Marenko", null, null, HairColor.KeineAngabe );
 
             //Assert
-            Assert.Equal(person.FirstName,"Marenko");
+            Assert.Equal( person.FirstName, "Marenko" );
             Assert.Null( person.LastName );
             Assert.Null( person.BirthDay );
             Assert.NotNull( HairColor.KeineAngabe );
@@ -96,11 +96,10 @@
 
             //Assert
             Assert.Equal( person.FirstName, "Marenko" );
-            Assert.Equal( person.LastName,"Babic" );
+            Assert.Equal( person.LastName, "Babic" );
             Assert.Null( person.BirthDay );
-            Assert.NotNull( HairColor.KeineAngabe );
+            Assert.Equal( person.HairColor, HairColor.KeineAngabe );
         }
-
 
         [Fact]
         public void PersonManagement_CreateNewPersonWith3Parameter_PersonNotNull()
@@ -110,74 +109,113 @@
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
 
             //Act
-            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", null, HairColor.Braun );
+            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", null,HairColor.Braun );
 
             //Assert
-            Assert.Contains( person.FirstName, "Marenko" );
-            Assert.Contains( person.LastName, "Babic" );
-            Assert.Null( person.BirthDay);
-            Assert.Contains(person.HairColor,HairColor.Braun));
+            Assert.Equal( person.FirstName, "Marenko");
+            Assert.Equal( person.LastName, "Babic" );
+            Assert.Null( person.BirthDay );
+            Assert.Equal(person.HairColor,HairColor.Braun );
 
         }
 
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterWithBirthDay_ContainsBirthday()
+        public void PersonManagement_SearchPerson_ParameterWithFirstName_ContainsPersonPersonListNotNull()
         {
             //Arrange
-            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
-            //Act
-            //Assert
+            Person person = new Person( null, null, null, HairColor.KeineAngabe );
+            List<Person> listPerson = new List<Person>()
+            {
+                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
+                new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
+            };
 
+            //Act
+            personalmanagement.SearchPerson( "Robert", null, null, HairColor.KeineAngabe, listPerson );
+
+            //Assert
+            Assert.NotNull( listPerson );
+            Assert.Equal( listPerson.Count, 3 );
+            Assert.Contains( listPerson, item => item.FirstName.Equals( "Robert", StringComparison.OrdinalIgnoreCase ) );
         }
 
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterWithLastNameAndFirstName_ContainsLastNameAndFirstName()
+        public void PersonManagement_SearchPersonWith2Parameter_PersonListNotNullContainPerson()
         {
             //Arrange
-            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
+            Person person = new Person( null, null, null, HairColor.KeineAngabe );
+            List<Person> listPerson = new List<Person>()
+            {
+                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
+                new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
+            };
+
             //Act
+            personalmanagement.SearchPerson( "Patrick", "Knofel", null, HairColor.KeineAngabe, listPerson );
+
             //Assert
-            Assert.Contains( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ) );
-            Assert.Contains( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
+            Assert.NotNull( listPerson );
+            Assert.Equal( listPerson.Count, 3 );
+            Assert.Contains( listPerson,
+                item => item.FirstName.Equals( "Patrick", StringComparison.OrdinalIgnoreCase )
+                && item.LastName.Equals( "Knofel", StringComparison.OrdinalIgnoreCase ) );
         }
 
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterWithLastnameFirstnameBirthday_ContainsLastnameFirstnameAndBirthday()
+        public void PersonManagement_SearchPersonWith3Parameter_PersonListNotNullContainPerson()
         {
             //Arrange
-            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
+            Person person = new Person( null, null, null, HairColor.KeineAngabe );
+            List<Person> listPerson = new List<Person>()
+            {
+                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
+                new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
+            };
+
             //Act
+            personalmanagement.SearchPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.KeineAngabe, listPerson );
 
             //Assert
-            Assert.Contains( viewModel.PersonList, item => item.FirstName.Equals( "marenko", StringComparison.OrdinalIgnoreCase ) );
-            Assert.Contains( viewModel.PersonList, item => item.LastName.Equals( "babic", StringComparison.OrdinalIgnoreCase ) );
-            //Assert.Contains( viewModel.PersonList, item => item.BirthDay.Equals( "19860513") );
-            Assert.Contains( viewModel.PersonList, item => item.HairColor.Equals( HairColor.KeineAngabe ) );
-
-
-
-
-
-
+            Assert.NotNull( listPerson );
+            Assert.Equal( listPerson.Count, 3 );
+            Assert.Contains( listPerson,
+                item => item.FirstName.Equals( "Marenko", StringComparison.OrdinalIgnoreCase )
+                && item.LastName.Equals( "Babic", StringComparison.OrdinalIgnoreCase )
+                && item.BirthDay.Equals( new DateTime( 1986, 05, 13 ) )
+                );
         }
+
         [Fact]
-        public void PersonManagement_SearchPerson_ParameterWithAll_ContainsAll()
+        public void PersonManagement_SearchPersonWith4Parameter_PersonListNotNullContainPerson()
         {
             //Arrange
-            PersonRandomViewModel viewModel = new PersonRandomViewModel();
             PersonalManagement personalmanagement = new PersonalManagement();
+            Person person = new Person( null, null, null, HairColor.KeineAngabe );
+            List<Person> listPerson = new List<Person>()
+            {
+                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
+                new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
+            };
 
             //Act
+            personalmanagement.SearchPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.Braun, listPerson );
+
             //Assert
-            Assert.Contains( viewModel.PersonList, item => item.FirstName.Equals( "Marenko" ) );
-            Assert.Contains( viewModel.PersonList, item => item.LastName.Equals( "Babic" ) );
-            //Assert.Contains( viewModel.PersonList, item => item.BirthDay.Equals( DateTime.Now ) );
-            Assert.Contains( viewModel.PersonList, item => item.HairColor.Equals( HairColor.Braun ) );
+            Assert.NotNull( listPerson );
+            Assert.Equal( listPerson.Count, 3 );
+            Assert.Contains( listPerson,
+                item => item.FirstName.Equals( "Marenko", StringComparison.OrdinalIgnoreCase )
+                && item.LastName.Equals( "Babic", StringComparison.OrdinalIgnoreCase )
+                && item.BirthDay.Equals( new DateTime( 1986, 05, 13 ) )
+                && item.HairColor.Equals( HairColor.Braun )
+                );
         }
-
-
     }
 }
