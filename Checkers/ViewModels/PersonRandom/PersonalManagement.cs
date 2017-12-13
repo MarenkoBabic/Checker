@@ -30,17 +30,17 @@
         public IEnumerable<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, List<Person> listPerson )
         {
             IEnumerable<Person> filteredList = null;
-            if( !string.IsNullOrEmpty( firstName ) || !string.IsNullOrEmpty( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
+            if( HasValue(firstName) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
             {
                 filteredList = listPerson;
 
                 //Suche Personen mit Vorname/ Nachname / Vorname und Nachname
-                if( !string.IsNullOrEmpty( firstName ) )
+                if( HasValue( firstName ) )
                 {
                     filteredList = filteredList.Where( person => person.FirstName.Equals( firstName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
 
-                if( !string.IsNullOrEmpty( lastName ) )
+                if(HasValue( lastName ) )
                 {
                     filteredList = filteredList.Where( person => person.LastName.Equals( lastName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
@@ -59,6 +59,10 @@
             return filteredList;
         }
 
+        private  bool HasValue(string s )
+        {
+            return !string.IsNullOrEmpty( s );
+        }
         public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
         {
             Person person = new Person( firstName, lastName, birthDay, color );

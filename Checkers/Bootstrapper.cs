@@ -27,12 +27,12 @@
 
         protected override void OnStartup( object sender, StartupEventArgs e )
         {
-            var settings = new Dictionary<string, object>()
-            {
-                {"MinHeight",800 },{"MinWidth",1000 }
-            };
+            //var settings = new Dictionary<string, object>()
+            //{
+            //    {"MinHeight",800 },{"MinWidth",1000 }
+            //};
 
-            DisplayRootViewFor<ShellViewModel>( settings );
+            DisplayRootViewFor<ShellViewModel>();
         }
 
         //protected override object GetInstance( Type service, string key )

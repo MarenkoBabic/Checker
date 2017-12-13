@@ -24,7 +24,7 @@
             get;
             set;
         }
-        public DateTime? BirthDay
+        public string BirthDay
         {
             get;
             set;
@@ -102,12 +102,28 @@
 
         public void Filter()
         {
-            this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, BirthDay, HairColor, PersonList );
+            if( !string.IsNullOrEmpty( BirthDay ) )
+            {
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, DateTime.Parse(BirthDay), HairColor, PersonList );
+            }
+            else
+            {
+                DateTime? birthDayNull = null;
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDayNull, HairColor, PersonList );
+            }
         }
 
         public void CreatePerson()
         {
-            collection.Add( personalManager.CreateNewPerson( FirstName, LastName, BirthDay, HairColor ) );
+            if( !string.IsNullOrEmpty( BirthDay ) )
+            {
+                collection.Add( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor ) );
+            }
+            else
+            {
+                DateTime? birthDayNull = null;
+                collection.Add( personalManager.CreateNewPerson( FirstName, LastName,birthDayNull, HairColor ) );
+            }
             xml.SerializePersonList( collection.ToList() );
             PersonList = collection.ToList();
         }
