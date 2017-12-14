@@ -31,13 +31,13 @@
                 x:Name="CountPerson" MinHeight="25" TextWrapping="Wrap" Margin="5"/>
 
         <Button Grid.Column="4" Grid.Row="1" 
-                Content="Generieren" x:Name="GeneratorRandomPerson" MinHeight="25" Margin="5"/>
+                Content="Generieren" x:Name="GenerateRandomPerson" MinHeight="25" Margin="5"/>
 
         <Button Grid.Row="1" Grid.Column="5" 
                 Content="Liste leeren" x:Name="DeletePersonList" MinHeight="25" Margin="5"/>
 
         <DataGrid Grid.Row="2" Grid.ColumnSpan="123456" AutoGenerateColumns="False" Height="300"
-                ItemsSource="{Binding PersonList}" Margin="5" MinRowHeight="25" MinColumnWidth="125">
+                ItemsSource="{Binding Path=MergedPersonList}" Margin="5" MinRowHeight="25" MinColumnWidth="125">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}"/>
@@ -70,9 +70,9 @@
                 MinHeight="25"  Margin="5"/>
 
         <Button Grid.Column="4" Grid.Row="4"
-                x:Name="Filter" Content="Filtern" MinHeight="25" Margin="5"/>
+                x:Name="FilterPersonList" Content="Filtern" MinHeight="25" Margin="5"/>
         <Button Grid.Column="5" Grid.Row="4"
-                x:Name="CreatePerson" Content="Neue Person" MinHeight="25" Margin="5"/>
+                x:Name="CreateNewPerson" Content="Neue Person" MinHeight="25" Margin="5"/>
 
         <DataGrid Grid.Row="5" Grid.ColumnSpan="123456" 
                   Height="400" ItemsSource="{Binding ListPersonFiltered}" Margin="5" MinRowHeight="25" MinColumnWidth="125" AutoGenerateColumns="False">

@@ -6,6 +6,7 @@
     using System.Linq;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
+    using System.Collections.ObjectModel;
 
     public class PersonalManagement : ViewModelBase
     {
@@ -27,7 +28,7 @@
             return listPerson;
         }
 
-        public IEnumerable<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, List<Person> listPerson )
+        public IEnumerable<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson )
         {
             IEnumerable<Person> filteredList = null;
             if( HasValue(firstName) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
@@ -59,7 +60,7 @@
             return filteredList;
         }
 
-        private  bool HasValue(string s )
+        private bool HasValue(string s )
         {
             return !string.IsNullOrEmpty( s );
         }

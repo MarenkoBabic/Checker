@@ -1,27 +1,27 @@
 ﻿namespace Checkers.ViewModels.PersonRandom
 {
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
-    
 
 
-    public class Xml
+
+    public class XmlHelper
     {
-        public  List<Person> DeserializePersonList()
+        public ObservableCollection<Person> DeserializePersonList()
         {
             //der Typ der zu deserialisierenden Klasse muss übergeben werden            
-            XmlSerializer deserializer = new XmlSerializer( typeof( List<Person> ) );
+            XmlSerializer deserializer = new XmlSerializer( typeof( ObservableCollection<Person> ) );
             FileStream fs = new FileStream( "personList.xml", FileMode.Open );
-            List<Person> personList = (List<Person>)deserializer.Deserialize( fs );
+            ObservableCollection<Person> personList = (ObservableCollection<Person>)deserializer.Deserialize( fs );
             fs.Close();
             return personList;
         }
 
-        public  void SerializePersonList( List<Person> PersonList )
+        public  void SerializePersonList( ObservableCollection<Person> PersonList )
         {
-            XmlSerializer serializer = new XmlSerializer( typeof( List<Person> ) );
+            XmlSerializer serializer = new XmlSerializer( typeof( ObservableCollection<Person> ) );
             FileStream fs = new FileStream( "personList.xml", FileMode.Create );
             serializer.Serialize( fs, PersonList );
             fs.Close();

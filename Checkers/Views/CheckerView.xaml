@@ -4,61 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
-             mc:Ignorable="d" Background="Black">
+             mc:Ignorable="d" Background="Black" Height="800" d:DesignWidth="800">
 
-    <Grid Margin="10">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!--0--> <ColumnDefinition Width="10"/>
+            <!--1--> <ColumnDefinition Width="3*"/>
+            <!--2--> <ColumnDefinition Width="10"/>
+            <!--3--> <ColumnDefinition Width="1*"/>
+            <!--4--> <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!--0--> <RowDefinition Height="10"/>
+            <!--1--> <RowDefinition Height="0.5*"/>
+            <!--2--> <RowDefinition Height="10"/>
+            <!--3--> <RowDefinition Height="3*"/>
+            <!--4--> <RowDefinition Height="1*"/>
+            <!--5--> <RowDefinition Height="10"/>
+            <!--6--> <RowDefinition Height="0.5*"/>
+            <!--7--> <RowDefinition Height="3*"/>
+            <!--8--> <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock
-            Text="{Binding ErrorMessage}"
-            Foreground="White" 
-            Background="#FF575454"
-            Margin="10,10,270,0"
-            TextAlignment="Center"
-            FontSize="20"
-            VerticalAlignment="Top"
-            Height="50"/>
-        <ComboBox
-            Margin="0,10,10,0"
-            ItemsSource="{Binding CheckerAuswahl}"
-            SelectedItem="{Binding SelectedChecker}"
-            Background="#FF575454"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Height="50"
-            Width="250">
-            <ComboBox.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#FF575454"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.DesktopBrushKey}" Color="Green"/>
-            </ComboBox.Resources>
-        </ComboBox>
-        <TextBox 
-            Text="{Binding Text}" 
-            Foreground="White"
-            Background="#FF575454"
-            TextAlignment="Center"
-            Margin="10,76,270,0"
-            VerticalAlignment="Top"
-            Height="200"
-            TextWrapping="Wrap"/>
-        <Button x:Name="CheckButton"
-                Background="#FF575454"
-                Margin="0,226,10,0"
-                Foreground="White"
+        <TextBlock Grid.Column="1" Grid.Row="1" 
+                   Text="{Binding ErrorMessage}"
+                   Background="White"
+                   TextAlignment="Center" MinHeight="40"/>
+
+        <ComboBox Grid.Column="3" Grid.Row="1"
+                  ItemsSource="{Binding CheckerAuswahl}"
+                  SelectedItem="{Binding SelectedChecker}"/>
+
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
+                 Text="{Binding Text}" 
+                 Background="Wheat" MinHeight="150"/>
+        
+        <Button Grid.Column="3" Grid.Row="4"
+                x:Name="CheckButton"
                 Content="Testen"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Height="50" Width="250"/>
-        <Label 
-            Content="Ergebnisse"
-            Foreground="White"
-            Margin="10,274,702,179"/>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="10,304,10,0">
-            <TextBlock 
-            Text="{Binding TestResults}"
-            Foreground="White"
-            Background="#FF575454"
-            TextWrapping="Wrap"/>
-        </ScrollViewer>
+                MinHeight="40" VerticalAlignment="Bottom"/>
+
+        <Label Grid.Column="1" Grid.Row="6"
+               Foreground="White"
+               Content="Ergebnisse"/>
+
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7"
+                   Text="{Binding TestResults}"
+                   Background="White"
+                   TextWrapping="Wrap" Height="300"/>
 
     </Grid>
 </UserControl>

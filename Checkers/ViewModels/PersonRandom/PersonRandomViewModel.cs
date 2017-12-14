@@ -12,7 +12,7 @@
 
     public class PersonRandomViewModel : ViewModelBase, IShell
     {
-        Xml xml = new Xml();
+        XmlHelper xml = new XmlHelper();
         PersonalManagement personalManager = new PersonalManagement();
         public string FirstName
         {
@@ -38,18 +38,6 @@
             set
             {
                 hairColor = value;
-            }
-        }
-        public List<Person> PersonList
-        {
-            get
-            {
-                return personList;
-            }
-            set
-            {
-                personList = value;
-                OnPropertyChanged( "PersonList" );
             }
         }
         public IEnumerable<Person> ListPersonFiltered
@@ -82,29 +70,30 @@
                 countPerson = value;
             }
         }
-        public ObservableCollection<Person> collection { get; set; }
+        public ObservableCollection<Person> PersonList { get; set; }
 
         public PersonRandomViewModel()
         {
-            collection = new ObservableCollection<Person>();
+            PersonList = new ObservableCollection<Person>();
             PersonList = xml.DeserializePersonList();
         }
 
-        public void GeneratorRandomPerson()
+        public void GenerateRandomPerson()
         {
             var list = new List<Person>();
             bool result = int.TryParse( CountPerson, out int number );
+
             list = personalManager.CreateRandomPerson( number );
-            list.ForEach( collection.Add );
-            xml.SerializePersonList( collection.ToList() );
-            PersonList = collection.ToList();
+            list.ForEach( PersonList.Add );
+
+            xml.SerializePersonList( PersonList );
         }
 
-        public void Filter()
+        public void FilterPersonList()
         {
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, DateTime.Parse(BirthDay), HairColor, PersonList );
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor, PersonList );
             }
             else
             {
@@ -113,19 +102,18 @@
             }
         }
 
-        public void CreatePerson()
+        public void CreateNewPerson()
         {
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
-                collection.Add( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor ) );
+                PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor ) );
             }
             else
             {
                 DateTime? birthDayNull = null;
-                collection.Add( personalManager.CreateNewPerson( FirstName, LastName,birthDayNull, HairColor ) );
+                PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, birthDayNull, HairColor ) );
             }
-            xml.SerializePersonList( collection.ToList() );
-            PersonList = collection.ToList();
+            xml.SerializePersonList( PersonList );
         }
 
         public void DeletePersonList()
@@ -135,7 +123,6 @@
         }
 
         private string countPerson;
-        private List<Person> personList;
         private IEnumerable<Person> listPersonFiltered;
         private HairColor hairColor;
     }

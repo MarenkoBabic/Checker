@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Checkers.ViewModels;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
@@ -34,7 +35,7 @@
         }
 
         [Fact]
-        public void PersonManagement_CreateNewPersonWithParamters_ParameterNotNull()
+        public void PersonManagement_CreateNewPersonWithParamters_PersonNotNUll()
         {
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
@@ -64,7 +65,7 @@
             Assert.Null( person.FirstName );
             Assert.Null( person.LastName );
             Assert.Null( person.BirthDay );
-            Assert.NotNull( person.HairColor );
+            Assert.Equal( person.HairColor,HairColor.KeineAngabe);
         }
 
         [Fact]
@@ -81,7 +82,7 @@
             Assert.Equal( person.FirstName, "Marenko" );
             Assert.Null( person.LastName );
             Assert.Null( person.BirthDay );
-            Assert.NotNull( HairColor.KeineAngabe );
+            Assert.Equal( HairColor.KeineAngabe,HairColor.KeineAngabe );
         }
 
         [Fact]
@@ -109,13 +110,13 @@
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
 
             //Act
-            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", null,HairColor.Braun );
+            person = personalmanagement.CreateNewPerson( "Marenko", "Babic", DateTime.Parse("13.05.1986"),HairColor.KeineAngabe );
 
             //Assert
             Assert.Equal( person.FirstName, "Marenko");
             Assert.Equal( person.LastName, "Babic" );
-            Assert.Null( person.BirthDay );
-            Assert.Equal(person.HairColor,HairColor.Braun );
+            Assert.Equal( person.BirthDay,DateTime.Parse("13.05.1986"));
+            Assert.Equal(person.HairColor,HairColor.KeineAngabe );
 
         }
 
@@ -125,7 +126,7 @@
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
-            List<Person> listPerson = new List<Person>()
+            ObservableCollection<Person> listPerson = new ObservableCollection<Person>()
             {
                 new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
                 new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
@@ -147,22 +148,23 @@
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
-            List<Person> listPerson = new List<Person>()
+            ObservableCollection<Person> listPerson = new ObservableCollection<Person>()
             {
                 new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Rot ),
                 new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
                 new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
             };
 
             //Act
-            personalmanagement.SearchPerson( "Patrick", "Knofel", null, HairColor.KeineAngabe, listPerson );
+            personalmanagement.SearchPerson( "Marenko", "Babic", null, HairColor.KeineAngabe, listPerson );
 
             //Assert
             Assert.NotNull( listPerson );
-            Assert.Equal( listPerson.Count, 3 );
+            Assert.Equal( listPerson.Count, 4 );
             Assert.Contains( listPerson,
-                item => item.FirstName.Equals( "Patrick", StringComparison.OrdinalIgnoreCase )
-                && item.LastName.Equals( "Knofel", StringComparison.OrdinalIgnoreCase ) );
+                item => item.FirstName.Equals( "Marenko", StringComparison.OrdinalIgnoreCase )
+                && item.LastName.Equals( "Babic", StringComparison.OrdinalIgnoreCase ) );
         }
 
         [Fact]
@@ -171,7 +173,7 @@
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
-            List<Person> listPerson = new List<Person>()
+            ObservableCollection<Person> listPerson = new ObservableCollection<Person>()
             {
                 new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
                 new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
@@ -197,7 +199,7 @@
             //Arrange
             PersonalManagement personalmanagement = new PersonalManagement();
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
-            List<Person> listPerson = new List<Person>()
+            ObservableCollection<Person> listPerson = new ObservableCollection<Person>()
             {
                 new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
                 new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
