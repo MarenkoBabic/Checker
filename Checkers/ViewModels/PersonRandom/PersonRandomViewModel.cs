@@ -89,7 +89,7 @@
             xml.SerializePersonList( PersonList );
         }
 
-        public void FilterPersonList()
+        public void Filter()
         {
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
