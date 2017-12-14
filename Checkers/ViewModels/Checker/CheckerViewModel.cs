@@ -1,6 +1,7 @@
 ﻿namespace Checkers.ViewModels
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
@@ -20,18 +21,36 @@
                 displayName = value;
             }
         }
-        public string TestResults
+        public ObservableCollection<string> PalindromeList
         {
             get
             {
-                return testResults;
+                return palindromeList;
             }
             set
             {
-                testResults = value;
-                OnPropertyChanged( "testResults" );
+                palindromeList = value;
             }
         }
+        public ObservableCollection<string> PrimzahlList
+        {
+            get
+            {
+                return primzahlList;
+            }
+            set
+            {
+                primzahlList = value;
+                OnPropertyChanged( "PrimzahlList" );
+            }
+        }
+
+        public ObservableCollection<string> OddEvenList
+        {
+            get { return oddEvenList; }
+            set { oddEvenList = value; }
+        }
+
         public string ErrorMessage
         {
             get
@@ -65,6 +84,9 @@
         #endregion
         public CheckerViewModel()
         {
+            oddEvenList = new ObservableCollection<string>();
+            PalindromeList = new ObservableCollection<string>();
+            PrimzahlList = new ObservableCollection<string>();
             DisplayName = "Checker";
             CheckerAuswahl = new List<IChecker>
             {
@@ -81,7 +103,7 @@
                 if( !string.IsNullOrWhiteSpace( Text ) )
                 {
                     count++;
-                    Checker(count);
+                    Checker( count );
                 }
                 else
                 {
@@ -94,14 +116,12 @@
             }
         }
 
-        public void Checker(int count)
+        public void Checker( int count )
         {
-            List<string> ResultList = new List<string>();
-
             if( SelectedChecker is PalindromeChecker )
             {
                 bool result = SelectedChecker.Validate( Text );
-                ResultList.Add( Text + " " + PalindromeResult( result ) );
+                PalindromeList.Add( Text + " " + PalindromeResult( result ) );
             }
             else if( SelectedChecker is OddEvenChecker )
             {
@@ -110,7 +130,7 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool result = SelectedChecker.Validate( Text );
-                    ResultList.Add( Text + " " + OddEvenResult( result ) );
+                    OddEvenList.Add( Text + " " + OddEvenResult( result ) );
                 }
                 else
                 {
@@ -124,14 +144,14 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool result = SelectedChecker.Validate( Text );
-                    ResultList.Add( text + " " + PrimzahlResult(result) );
+                    PrimzahlList.Add( text + " " + PrimzahlResult( result ) );
                 }
                 else
                 {
                     ErrorMessage = "Ungültige Angabe";
                 }
             }
-            TextResult( ResultList,count );
+
         }
 
         #region Result
@@ -170,16 +190,13 @@
         }
         #endregion
 
-        public void TextResult( List<string> Result, int count )
-        {
-            foreach( string item in Result)
-            {
-                TestResults += item + ",\t";
-            }
-        }
+
         private string displayName;
         private string errorMessage;
         private string text;
-        private string testResults;
+        private ObservableCollection<string> primzahlList;
+        private ObservableCollection<string> oddEvenList;
+        private ObservableCollection<string> palindromeList;
+
     }
 }
