@@ -86,7 +86,7 @@
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( PersonList.Add );
 
-            xml.SerializePersonList( PersonList );
+            xml.SerializePersonListOrSaveList( PersonList );
         }
 
         public void Filter()
@@ -113,13 +113,18 @@
                 DateTime? birthDayNull = null;
                 PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, birthDayNull, HairColor ) );
             }
-            xml.SerializePersonList( PersonList );
+            xml.SerializePersonListOrSaveList( PersonList );
         }
 
         public void DeletePersonList()
         {
             xml.RemoveAll();
-            PersonList = null;
+            PersonList.Clear();
+        }
+
+        public void SaveChangedList()
+        {
+            xml.SerializePersonListOrSaveList( PersonList);
         }
 
         private string countPerson;

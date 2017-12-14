@@ -21,7 +21,7 @@
                 Person person = new Person(
                         firstNameList.OrderBy( x => rnd.Next() ).First(),
                         lastNameList.OrderBy( x => rnd.Next() ).First(),
-                        DateTime.Today.AddDays( -rnd.Next( 10 * 365 ) ),
+                        DateTime.Today.AddDays( -rnd.Next( 30 * 365 ) ),
                         (HairColor)getColor.GetValue( rnd.Next( 1, 7 ) ) );
                 listPerson.Add( person );
             }

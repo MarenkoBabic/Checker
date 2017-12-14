@@ -19,7 +19,7 @@
             return personList;
         }
 
-        public  void SerializePersonList( ObservableCollection<Person> PersonList )
+        public void SerializePersonListOrSaveList( ObservableCollection<Person> PersonList )
         {
             XmlSerializer serializer = new XmlSerializer( typeof( ObservableCollection<Person> ) );
             FileStream fs = new FileStream( "personList.xml", FileMode.Create );
