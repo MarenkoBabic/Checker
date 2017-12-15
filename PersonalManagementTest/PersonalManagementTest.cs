@@ -150,7 +150,7 @@
             Person person = new Person( null, null, null, HairColor.KeineAngabe );
             ObservableCollection<Person> listPerson = new ObservableCollection<Person>()
             {
-                new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Braun ),
+                new Person("Marenko", "Babic",new DateTime(1986,05,13), HairColor.Braun ),
                 new Person("Marenko", "Babic", new DateTime(1986,05,13), HairColor.Rot ),
                 new Person("Patrick", "Knofel", new DateTime(2016,11,01), HairColor.Rot ),
                 new Person("Robert","Baxa",new DateTime(1990,01,01),HairColor.Blond)
@@ -181,16 +181,15 @@
             };
 
             //Act
-            personalmanagement.SearchPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.KeineAngabe, listPerson );
+            personalmanagement.SearchPerson( "Marenko", "Babic",DateTime.Parse("13.05.1986") , HairColor.KeineAngabe, listPerson );
 
             //Assert
             Assert.NotNull( listPerson );
             Assert.Equal( listPerson.Count, 3 );
             Assert.Contains( listPerson,
                 item => item.FirstName.Equals( "Marenko", StringComparison.OrdinalIgnoreCase )
-                && item.LastName.Equals( "Babic", StringComparison.OrdinalIgnoreCase )
-                && item.BirthDay.Equals( new DateTime( 1986, 05, 13 ) )
-                );
+                && item.LastName.Equals( "Babic", StringComparison.OrdinalIgnoreCase ));
+            Assert.True( person.BirthDay.HasValue );
         }
 
         [Fact]

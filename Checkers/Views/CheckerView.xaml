@@ -49,30 +49,13 @@
                Foreground="White"
                Content="Ergebnisse"/>
 
-        <DataGrid Grid.Column="1" Grid.Row="7"
-              ItemsSource="{Binding PalindromeList}"
-              AutoGenerateColumns="False">
+        <DataGrid Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4"
+             ItemsSource="{Binding ResultList}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding}" Header="Palidrome" IsReadOnly="false" />
+                <DataGridTextColumn Binding="{Binding TestTime}" Header="Datum" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Text}" Header="Text" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding TestResult}" Header="Ergebniss" MinWidth="150"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <DataGrid Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="3" 
-              ItemsSource="{Binding PrimzahlList}"
-              AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding}" Header="Primzahl" IsReadOnly="false" />
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <DataGrid Grid.Column="4" Grid.Row="7" 
-              ItemsSource="{Binding OddEvenList}"
-              AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding}" Header="OddEven" IsReadOnly="false" />
-            </DataGrid.Columns>
-        </DataGrid>
-
-
     </Grid>
 </UserControl>

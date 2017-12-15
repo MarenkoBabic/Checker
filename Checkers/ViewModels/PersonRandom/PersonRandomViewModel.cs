@@ -91,9 +91,11 @@
 
         public void Filter()
         {
+
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor, PersonList );
+                bool result =  DateTime.TryParse( BirthDay, out DateTime birthDay );
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDay, HairColor, PersonList );
             }
             else
             {

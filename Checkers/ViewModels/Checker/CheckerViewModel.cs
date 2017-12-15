@@ -1,15 +1,17 @@
 ﻿namespace Checkers.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Caliburn.Micro;
+    using Checkers.ViewModels.Checker;
 
     public class CheckerViewModel : ViewModelBase, IHaveDisplayName, IShell
     {
-        #region propertys
+        XmlHelper xml = new XmlHelper();
         public string DisplayName
         {
             get
@@ -21,36 +23,6 @@
                 displayName = value;
             }
         }
-        public ObservableCollection<string> PalindromeList
-        {
-            get
-            {
-                return palindromeList;
-            }
-            set
-            {
-                palindromeList = value;
-            }
-        }
-        public ObservableCollection<string> PrimzahlList
-        {
-            get
-            {
-                return primzahlList;
-            }
-            set
-            {
-                primzahlList = value;
-                OnPropertyChanged( "PrimzahlList" );
-            }
-        }
-
-        public ObservableCollection<string> OddEvenList
-        {
-            get { return oddEvenList; }
-            set { oddEvenList = value; }
-        }
-
         public string ErrorMessage
         {
             get
@@ -80,20 +52,24 @@
             get;
             set;
         }
-        public List<IChecker> CheckerAuswahl { get; set; }
-        #endregion
+        public List<IChecker> CheckerAuswahl
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<Result> ResultList { get; set; }
         public CheckerViewModel()
         {
-            oddEvenList = new ObservableCollection<string>();
-            PalindromeList = new ObservableCollection<string>();
-            PrimzahlList = new ObservableCollection<string>();
             DisplayName = "Checker";
             CheckerAuswahl = new List<IChecker>
             {
                 new PalindromeChecker(),new OddEvenChecker(),new PrimzahlChecker()
             };
+            ResultList = new ObservableCollection<Result>();
+            ResultList = xml.DeserializeResultList();
+
         }
-        int count = 0;
+
         public void CheckButton()
         {
             // Prüft ob Checker ausgewählt ist
@@ -102,8 +78,7 @@
                 // Prüft ob Text vorhanden ist
                 if( !string.IsNullOrWhiteSpace( Text ) )
                 {
-                    count++;
-                    Checker( count );
+                    Checker();
                 }
                 else
                 {
@@ -116,12 +91,15 @@
             }
         }
 
-        public void Checker( int count )
+        public void Checker()
         {
             if( SelectedChecker is PalindromeChecker )
             {
-                bool result = SelectedChecker.Validate( Text );
-                PalindromeList.Add( Text + " " + PalindromeResult( result ) );
+                bool test = SelectedChecker.Validate( Text );
+                Result result = new Result() {Text = Text,TestTime = DateTime.Now,TestResult = PalindromeResult(test)};
+                ResultList.Add( result );
+                xml.SerializeResultList( ResultList );
+
             }
             else if( SelectedChecker is OddEvenChecker )
             {
@@ -129,8 +107,11 @@
                 Regex reg = new Regex( "^[0-9]+$" );
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
-                    bool result = SelectedChecker.Validate( Text );
-                    OddEvenList.Add( Text + " " + OddEvenResult( result ) );
+                    bool test = SelectedChecker.Validate( Text );
+                    Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = OddEvenResult(test) };
+                    ResultList.Add( result );
+                    xml.SerializeResultList( ResultList );
+
                 }
                 else
                 {
@@ -143,60 +124,56 @@
                 Regex reg = new Regex( "^[0-9]+$" );
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
-                    bool result = SelectedChecker.Validate( Text );
-                    PrimzahlList.Add( text + " " + PrimzahlResult( result ) );
+                    bool test = SelectedChecker.Validate( Text );
+                    Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = PrimzahlResult(test)};
+                    ResultList.Add( result );
+                    xml.SerializeResultList( ResultList );
                 }
                 else
                 {
                     ErrorMessage = "Ungültige Angabe";
                 }
             }
-
         }
 
-        #region Result
         public string PalindromeResult( bool result )
         {
             if( result )
             {
-                return " ist ein Palindrome";
+                return  " ist ein Palindrome";
             }
             else
             {
-                return "ist kein Palindrome";
+                return  "ist kein Palindrome";
             }
         }
+
         public string OddEvenResult( bool result )
         {
             if( result )
             {
-                return "ist eine gerade Zahl";
+                return  "ist eine gerade Zahl";
             }
             else
             {
-                return "ist eine ungerade Zahl";
+                return  "ist eine ungerade Zahl";
             }
         }
+
         public string PrimzahlResult( bool result )
         {
             if( result )
             {
-                return "ist eine Primzahl";
+                return  "ist eine Primzahl";
             }
             else
             {
-                return "ist keine Primzahl";
+                return  "ist keine Primzahl";
             }
         }
-        #endregion
-
 
         private string displayName;
         private string errorMessage;
         private string text;
-        private ObservableCollection<string> primzahlList;
-        private ObservableCollection<string> oddEvenList;
-        private ObservableCollection<string> palindromeList;
-
     }
 }
