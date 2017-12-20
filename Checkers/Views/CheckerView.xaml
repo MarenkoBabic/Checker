@@ -12,7 +12,7 @@
             <!--1--> <ColumnDefinition Width="3*"/>
             <!--3--> <ColumnDefinition Width="1*"/>
             <!--4--> <ColumnDefinition Width="1*"/>
-            <!--5--> <ColumnDefinition Width="1*"/>
+            <!--5--> <ColumnDefinition Width="1.5*"/>
             <!--6--> <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

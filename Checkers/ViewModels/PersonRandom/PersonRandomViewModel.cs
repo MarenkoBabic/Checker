@@ -59,25 +59,16 @@
                 return Enum.GetValues( typeof( HairColor ) ).Cast<HairColor>();
             }
         }
-        public string CountPerson
-        {
-            get
-            {
-                return countPerson;
-            }
-            set
-            {
-                countPerson = value;
-            }
-        }
+        public string CountPerson { get; set; }
         public ObservableCollection<Person> PersonList { get; set; }
 
         public PersonRandomViewModel()
         {
             PersonList = new ObservableCollection<Person>();
-            PersonList = xml.DeserializePersonList();
         }
-
+        /// <summary>
+        /// Erzeugt eine Liste an Personen per Zufall
+        /// </summary>
         public void GenerateRandomPerson()
         {
             var list = new List<Person>();
@@ -86,15 +77,17 @@
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( PersonList.Add );
 
-            xml.SerializePersonListOrSaveList( PersonList );
         }
 
+        /// <summary>
+        /// Filtert die Personenliste
+        /// </summary>
         public void Filter()
         {
-
+            //Prüft ob string leer ist
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
-                bool result =  DateTime.TryParse( BirthDay, out DateTime birthDay );
+                bool result = DateTime.TryParse( BirthDay, out DateTime birthDay );
                 this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDay, HairColor, PersonList );
             }
             else
@@ -104,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Erzeugt eine einzelne Person
+        /// </summary>
         public void CreateNewPerson()
         {
             if( !string.IsNullOrEmpty( BirthDay ) )
@@ -115,21 +111,35 @@
                 DateTime? birthDayNull = null;
                 PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, birthDayNull, HairColor ) );
             }
-            xml.SerializePersonListOrSaveList( PersonList );
         }
 
-        public void DeletePersonList()
+        /// <summary>
+        /// Fügt eine Xml Datei der Liste hinzu
+        /// </summary>
+        public void AddXmlFile()
         {
-            xml.RemoveAll();
+            List<Person> list = new List<Person>();
+            list = xml.LoadXmlFile();
+            list.ForEach( PersonList.Add );
+        }
+
+        /// <summary>
+        /// Leert die Liste
+        /// </summary>
+        public void DeleteList()
+        {
+            //xml.RemoveAllNotes();
             PersonList.Clear();
         }
 
-        public void SaveChangedList()
+        /// <summary>
+        /// Speichert die Liste als Xml-File
+        /// </summary>
+        public void SaveListToXmlFile()
         {
-            xml.SerializePersonListOrSaveList( PersonList);
+            xml.SaveXmlFile( PersonList );
         }
 
-        private string countPerson;
         private IEnumerable<Person> listPersonFiltered;
         private HairColor hairColor;
     }
