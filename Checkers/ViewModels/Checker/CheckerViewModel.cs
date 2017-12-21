@@ -11,7 +11,9 @@
 
     public class CheckerViewModel : ViewModelBase, IHaveDisplayName, IShell
     {
-        XmlHelper xml = new XmlHelper();
+        /// <summary>
+        /// DisplayName
+        /// </summary>
         public string DisplayName
         {
             get
@@ -23,6 +25,10 @@
                 displayName = value;
             }
         }
+
+        /// <summary>
+        /// Fehlermeldung bei falsche Eingabe
+        /// </summary>
         public string ErrorMessage
         {
             get
@@ -35,6 +41,10 @@
                 OnPropertyChanged( "errorMessage" );
             }
         }
+
+        /// <summary>
+        /// Texteingabe 
+        /// </summary>
         public string Text
         {
             get
@@ -47,17 +57,30 @@
                 OnPropertyChanged( Text );
             }
         }
+
+        /// <summary>
+        /// Checkerauswahl
+        /// </summary>
         public IChecker SelectedChecker
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Liste an Checker
+        /// </summary>
         public List<IChecker> CheckerAuswahl
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Liste alle Ergebnisse
+        /// </summary>
         public ObservableCollection<Result> ResultList { get; set; }
+
         public CheckerViewModel()
         {
             DisplayName = "Checker";
@@ -66,10 +89,13 @@
                 new PalindromeChecker(),new OddEvenChecker(),new PrimzahlChecker()
             };
             ResultList = new ObservableCollection<Result>();
-            ResultList = xml.DeserializeResultList();
 
         }
 
+        /// <summary>
+        /// Prüft ob Checker ausgewählt ist
+        /// Prüft ob ein Texteingabe leer ist
+        /// </summary>
         public void CheckButton()
         {
             // Prüft ob Checker ausgewählt ist
@@ -91,6 +117,9 @@
             }
         }
 
+        /// <summary>
+        /// Prüft welche Checker ausgewählt ist 
+        /// </summary>
         public void Checker()
         {
             if( SelectedChecker is PalindromeChecker )
@@ -98,7 +127,6 @@
                 bool test = SelectedChecker.Validate( Text );
                 Result result = new Result() {Text = Text,TestTime = DateTime.Now,TestResult = PalindromeResult(test)};
                 ResultList.Add( result );
-                xml.SerializeResultList( ResultList );
 
             }
             else if( SelectedChecker is OddEvenChecker )
@@ -110,7 +138,6 @@
                     bool test = SelectedChecker.Validate( Text );
                     Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = OddEvenResult(test) };
                     ResultList.Add( result );
-                    xml.SerializeResultList( ResultList );
 
                 }
                 else
@@ -118,6 +145,7 @@
                     ErrorMessage = "Ungültige Angabe";
                 }
             }
+
             else if( SelectedChecker is PrimzahlChecker )
             {
                 //Prüft ob text nur Zahlen sind
@@ -127,7 +155,6 @@
                     bool test = SelectedChecker.Validate( Text );
                     Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = PrimzahlResult(test)};
                     ResultList.Add( result );
-                    xml.SerializeResultList( ResultList );
                 }
                 else
                 {
@@ -136,6 +163,12 @@
             }
         }
 
+
+        /// <summary>
+        /// Validiert ein bool zum String
+        /// </summary>
+        /// <param name="result">Bool Ergebnis</param>
+        /// <returns>Ergebnis als String</returns>
         public string PalindromeResult( bool result )
         {
             if( result )
@@ -148,6 +181,11 @@
             }
         }
 
+        /// <summary>
+        /// Validiert ein bool zum String
+        /// </summary>
+        /// <param name="result">Bool Ergebnis</param>
+        /// <returns>Ergebnis als String</returns>
         public string OddEvenResult( bool result )
         {
             if( result )
@@ -160,6 +198,11 @@
             }
         }
 
+        /// <summary>
+        /// Validiert ein bool zum String
+        /// </summary>
+        /// <param name="result">Bool Ergebnis</param>
+        /// <returns>Ergebnis als String</returns>
         public string PrimzahlResult( bool result )
         {
             if( result )

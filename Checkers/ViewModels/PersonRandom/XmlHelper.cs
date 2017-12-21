@@ -4,80 +4,53 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
-    using System.Linq;
     using System.Xml;
-    using System.Xml.Linq;
     using System.Xml.Serialization;
     using Microsoft.Win32;
-    using Personalmanagement.Dto;
 
     public class XmlHelper
     {
-      /// <summary>
-      /// Löscht alle Daten aus dem Dokument
-      /// </summary>
-      /// <param name="doc"></param>
-      /// <returns>Leeres XmlDocument</returns>
-        public XmlDocument RemoveAllNotes(XmlDocument doc)
-        {
-            XmlElement root = doc.DocumentElement;
-            root.RemoveAll();
-            return doc;
-        }
-
         /// <summary>
         /// Ladet eine Xml-Datei und fügt sie zur einer Liste hinzu
         /// </summary>
         /// <returns>List</returns>
-        public List<Person> LoadXmlFile()
+        public List<Person> LoadXmlFile( string path )
         {
             var list = new List<Person>();
-            XmlSerializer deserializer = new XmlSerializer( typeof( List<Person> ) );
-            FileStream fs = new FileStream( OpenXmlFile(), FileMode.Open );
-            list = (List<Person>)deserializer.Deserialize( fs );
-            fs.Close();
-            return list;
+            if( path == null )
+            {
+                return list;
+            }
+            using( FileStream fs = File.Open( path, FileMode.Open ) )
+            {
+                XmlSerializer deserializer = new XmlSerializer( typeof( List<Person> ) );
+                return (List<Person>)deserializer.Deserialize( fs );
+            }
         }
+
         /// <summary>
         /// Speichert eine Liste als Xml -File
         /// </summary>
         /// <param name="list"></param>
         public void SaveXmlFile( ObservableCollection<Person> list )
         {
-            string filename;
-            XDocument doc = new XDocument();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = "";
-            saveFileDialog.Filter = "Xml Files(.xml)|*.xml";
-            saveFileDialog.DefaultExt = ".xml";
-
-            Nullable<bool> result = saveFileDialog.ShowDialog();
-
-            if( result == true )
+            string filename = SaveFileDialog();
+            if( !string.IsNullOrEmpty( filename ) )
             {
-                filename = saveFileDialog.FileName;
-                XmlSerializer serializer = new XmlSerializer( typeof( ObservableCollection<Person> ) );
-                FileStream fs = new FileStream( filename, FileMode.Create );
-                serializer.Serialize( fs, list );
-                fs.Close();
+                using( FileStream fs = File.Open( filename, FileMode.Create ) )
+                {
+                    XmlSerializer serializer = new XmlSerializer( typeof( ObservableCollection<Person> ) );
+                    serializer.Serialize( fs, list );
+                    fs.Close();
+                }
             }
         }
+
         /// <summary>
-        /// 
+        /// Öffnet den AuswahlDialog
         /// </summary>
-        public void loadandsaveXMl()
-        {
-            string filename = OpenXmlFile();
-            XmlDocument document = new XmlDocument();
-            document.Load(filename);
-            RemoveAllNotes( document );
-            document.Save( filename );
-        }
-        /// <summary>
-        /// Öffnet eine Xml datei 
-        /// </summary>
-        /// <returns>Path von der Xml Datei</returns>
-        private string OpenXmlFile()
+        /// <returns>Pfad von der Xml Datei oder null</returns>
+        public string OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.FileName = "";
@@ -94,6 +67,25 @@
             return null;
         }
 
-        
+        /// <summary>
+        /// Öffnet den Speicherdialog
+        /// </summary>
+        /// <returns>Pfad von der Xml-Datei oder null</returns>
+        private string SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "";
+            saveFileDialog.Filter = "Xml Files(.xml)|*.xml";
+            saveFileDialog.DefaultExt = ".xml";
+
+            Nullable<bool> result = saveFileDialog.ShowDialog();
+
+            if( result == true )
+            {
+                string filename = saveFileDialog.FileName;
+                return filename;
+            }
+            return null;
+        }
     }
 }

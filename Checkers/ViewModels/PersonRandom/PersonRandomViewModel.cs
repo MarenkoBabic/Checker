@@ -14,21 +14,39 @@
     {
         XmlHelper xml = new XmlHelper();
         PersonalManagement personalManager = new PersonalManagement();
+
+        #region Property
+
+        /// <summary>
+        /// Eingabe für Vorname
+        /// </summary>
         public string FirstName
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Eingabe für Nachname
+        /// </summary>
         public string LastName
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Eingabe für Geburtsdatum
+        /// </summary>
         public string BirthDay
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Auswahl Haarfarbe
+        /// </summary>
         public HairColor HairColor
         {
             get
@@ -40,7 +58,11 @@
                 hairColor = value;
             }
         }
-        public IEnumerable<Person> ListPersonFiltered
+
+        /// <summary>
+        /// Personenliste gefiltert
+        /// </summary>
+        public ObservableCollection<Person> ListPersonFiltered
         {
             get
             {
@@ -52,6 +74,10 @@
                 OnPropertyChanged( nameof( ListPersonFiltered ) );
             }
         }
+
+        /// <summary>
+        /// Liste für Auswahl Haarfarbe in der Combobox
+        /// </summary>
         public IEnumerable<HairColor> HairColorList
         {
             get
@@ -59,13 +85,40 @@
                 return Enum.GetValues( typeof( HairColor ) ).Cast<HairColor>();
             }
         }
+
+        /// <summary>
+        /// Zahleingabe für generieren von Personen
+        /// </summary>
         public string CountPerson { get; set; }
+
+        /// <summary>
+        /// Collection von Personenliste
+        /// </summary>
         public ObservableCollection<Person> PersonList { get; set; }
+
+        /// <summary>
+        /// Speichert den Path von der zuletzt geöffnetet Xml
+        /// </summary>
+        public string XmlPath
+        {
+            get
+            {
+                return xmlPath;
+            }
+            set
+            {
+                xmlPath = value;
+                OnPropertyChanged( "XmlPath" );
+            }
+        }
+
+        #endregion
 
         public PersonRandomViewModel()
         {
             PersonList = new ObservableCollection<Person>();
         }
+
         /// <summary>
         /// Erzeugt eine Liste an Personen per Zufall
         /// </summary>
@@ -73,10 +126,8 @@
         {
             var list = new List<Person>();
             bool result = int.TryParse( CountPerson, out int number );
-
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( PersonList.Add );
-
         }
 
         /// <summary>
@@ -84,7 +135,6 @@
         /// </summary>
         public void Filter()
         {
-            //Prüft ob string leer ist
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
                 bool result = DateTime.TryParse( BirthDay, out DateTime birthDay );
@@ -114,13 +164,24 @@
         }
 
         /// <summary>
-        /// Fügt eine Xml Datei der Liste hinzu
+        /// Der Personenliste eine Xml-Datein hinzufügen
         /// </summary>
         public void AddXmlFile()
         {
+            XmlPath = xml.OpenFileDialog();
             List<Person> list = new List<Person>();
-            list = xml.LoadXmlFile();
+            list = xml.LoadXmlFile( XmlPath );
             list.ForEach( PersonList.Add );
+        }
+        /// <summary>
+        /// Der gefilterten Liste eine Xml-Datein hinzufügen
+        /// </summary>
+        public void AddFilterList()
+        {
+            XmlPath = xml.OpenFileDialog();
+            List<Person> list = new List<Person>();
+            list = xml.LoadXmlFile( XmlPath );
+            list.ForEach( ListPersonFiltered.Add );
         }
 
         /// <summary>
@@ -128,19 +189,36 @@
         /// </summary>
         public void DeleteList()
         {
-            //xml.RemoveAllNotes();
             PersonList.Clear();
         }
 
         /// <summary>
-        /// Speichert die Liste als Xml-File
+        /// Leert die gefilterete Liste
         /// </summary>
-        public void SaveListToXmlFile()
+        public void DeleteFilterList()
+        {
+            ListPersonFiltered.Clear();
+        }
+
+        /// <summary>
+        /// Speichert die Personenliste als Xml-File
+        /// </summary>
+        public void SaveListAsXmlFile()
         {
             xml.SaveXmlFile( PersonList );
         }
 
-        private IEnumerable<Person> listPersonFiltered;
+        /// <summary>
+        /// Speichert die gefilterete Liste als Xml-File
+        /// </summary>
+        public void SaveFilterListAsXmlFile()
+        {
+            xml.SaveXmlFile( ListPersonFiltered );
+        }
+
+        private ObservableCollection<Person> listPersonFiltered;
         private HairColor hairColor;
+        private string xmlPath;
+
     }
 }

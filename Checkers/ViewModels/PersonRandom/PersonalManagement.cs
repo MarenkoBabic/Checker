@@ -12,6 +12,12 @@
     {
         Random rnd = new Random();
         Array getColor = Enum.GetValues( typeof( HairColor ) );
+
+        /// <summary>
+        /// Generiert eine Person per Zufall
+        /// </summary>
+        /// <param name="countPerson"> Anzahl an Personen </param>
+        /// <returns>Liste mit Personen</returns>
         public List<Person> CreateRandomPerson( int countPerson )
         {
             List<Person> listPerson = new List<Person>();
@@ -28,10 +34,20 @@
             return listPerson;
         }
 
-        public IEnumerable<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson )
+        /// <summary>
+        /// Filtert die Personenliste
+        /// </summary>
+        /// <param name="firstName"> Der mitgebene Wert zum filtern</param>
+        /// <param name="lastName"> Der mitgebene Wert zum filtern</param>
+        /// <param name="birthDay"> Der mitgebene Wert zum filtern</param>
+        /// <param name="color"> Der mitgebene Wert zum filtern</param>
+        /// <param name="listPerson">Die mitgebene Liste zum Filtern </param>
+        /// <returns> Gefilterte Liste an Personen</returns>
+        public ObservableCollection<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson )
         {
+            ObservableCollection<Person> list = new ObservableCollection<Person>();
             IEnumerable<Person> filteredList = null;
-            if( HasValue(firstName) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
+            if( HasValue( firstName ) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
             {
                 filteredList = listPerson;
 
@@ -41,7 +57,7 @@
                     filteredList = filteredList.Where( person => person.FirstName.Equals( firstName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
 
-                if(HasValue( lastName ) )
+                if( HasValue( lastName ) )
                 {
                     filteredList = filteredList.Where( person => person.LastName.Equals( lastName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
@@ -49,7 +65,7 @@
                 if( birthDay.HasValue )
                 {
 
-                    filteredList = filteredList.Where( person => person.BirthDay.Equals( birthDay)).ToList();
+                    filteredList = filteredList.Where( person => person.BirthDay.Equals( birthDay ) ).ToList();
                 }
 
                 if( color != HairColor.KeineAngabe )
@@ -57,13 +73,31 @@
                     filteredList = filteredList.Where( person => person.HairColor.Equals( color ) ).ToList();
                 }
             }
-            return filteredList;
+            if( filteredList != null )
+            {
+                filteredList.ToList().ForEach( list.Add );
+            }
+            return list;
         }
 
-        private bool HasValue(string s )
+        /// <summary>
+        /// Validiert einen String und liefert das Ergebnis als bool
+        /// </summary>
+        /// <param name="s">Der zu überprüfende Wert</param>
+        /// <returns>True or False</returns>
+        private bool HasValue( string s )
         {
             return !string.IsNullOrEmpty( s );
         }
+
+        /// <summary>
+        /// Erzeugt eine neue Person
+        /// </summary>
+        /// <param name="firstName">Der mitgebene Wert</param>
+        /// <param name="lastName">Der mitgebene Wert</param>
+        /// <param name="birthDay">Der mitgebene Wert</param>
+        /// <param name="color">Der mitgebene Wert</param>
+        /// <returns>Eine Person</returns>
         public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
         {
             Person person = new Person( firstName, lastName, birthDay, color );
@@ -72,7 +106,6 @@
 
         private List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Markus", "Patrick" };
         private List<string> lastNameList = new List<string>() { "Muster", "Pichler", "Eiweck", "Wolfrat", "Raböck", "Russen", "Grewen" };
-
     }
 }
 

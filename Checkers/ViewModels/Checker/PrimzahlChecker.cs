@@ -4,6 +4,11 @@ namespace Checkers.ViewModels
 {
     public class PrimzahlChecker : ViewModelBase, IChecker
     {
+        /// <summary>
+        /// Prüft ob Eingabe eine Primzahl ist
+        /// </summary>
+        /// <param name="value">Texteingabe</param>
+        /// <returns>Boolwert</returns>
         bool IChecker.Validate(string value)
         {
             if( value != null )

@@ -79,7 +79,6 @@
     </Compile>
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\Checker\Result.cs" />
-    <Compile Include="ViewModels\Checker\XmlHelper.cs" />
     <Compile Include="ViewModels\PersonRandom\HairColor.cs" />
     <Compile Include="ViewModels\PersonRandom\Person.cs" />
     <Compile Include="ViewModels\PersonRandom\PersonRandomViewModel.cs" />

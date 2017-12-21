@@ -17,12 +17,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!--0--> <RowDefinition Height="10"/>
-            <!--1--> <RowDefinition Height="0.5*"/>
+            <!--1--> <RowDefinition Height="Auto"/>
             <!--2--> <RowDefinition Height="10"/>
             <!--3--> <RowDefinition Height="3*"/>
-            <!--4--> <RowDefinition Height="1*"/>
-            <!--5--> <RowDefinition Height="10"/>
-            <!--6--> <RowDefinition Height="0.5*"/>
+            <!--4--> <RowDefinition Height="Auto"/>
+            <!--6--> <RowDefinition Height="Auto"/>
             <!--7--> <RowDefinition Height="3*"/>
             <!--8--> <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -30,26 +29,29 @@
         <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                    Text="{Binding ErrorMessage}"
                    Background="White"
-                   TextAlignment="Center" MinHeight="40"/>
+                   TextAlignment="Center"
+                   MinHeight="30"/>
 
         <ComboBox Grid.Column="4" Grid.Row="1"
                   ItemsSource="{Binding CheckerAuswahl}"
                   SelectedItem="{Binding SelectedChecker}"/>
 
         <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
-                 Text="{Binding Text}" 
-                 Background="White" MinHeight="150"/>
+                 x:Name="Text"
+                 Background="White"
+                 MinHeight="150"/>
         
         <Button Grid.Column="4" Grid.Row="4"
                 x:Name="CheckButton"
                 Content="Testen"
-                MinHeight="40" VerticalAlignment="Bottom"/>
+                MinHeight="40"
+                VerticalAlignment="Bottom"/>
 
-        <Label Grid.Column="1" Grid.Row="6"
+        <Label Grid.Column="1" Grid.Row="5"
                Foreground="White"
                Content="Ergebnisse"/>
 
-        <DataGrid Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4"
+        <DataGrid Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4"
              ItemsSource="{Binding ResultList}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TestTime}" Header="Datum" MinWidth="150"/>
@@ -57,5 +59,6 @@
                 <DataGridTextColumn Binding="{Binding TestResult}" Header="Ergebniss" MinWidth="150"/>
             </DataGrid.Columns>
         </DataGrid>
+        
     </Grid>
 </UserControl>

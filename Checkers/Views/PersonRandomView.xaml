@@ -5,137 +5,210 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Checkers.Views"
              mc:Ignorable="d" Margin="10" Background="Black">
+    <TabControl Margin="5" Height="Auto">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-           <!--0--> <ColumnDefinition Width="1*" />
-           <!--1--> <ColumnDefinition Width="1*" />
-           <!--2--> <ColumnDefinition Width="1*" />
-           <!--3--> <ColumnDefinition Width="1*" />
-           <!--4--> <ColumnDefinition Width="1*" />
-           <!--5--> <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-           <!--0--> <RowDefinition Height="0.5*"/>
-           <!--1--> <RowDefinition Height="0.5*"/>
-           <!--2--> <RowDefinition Height="2*"/>
-           <!--3--> <RowDefinition Height="0.5*"/>
-           <!--4--> <RowDefinition Height="0.5*"/>
-           <!--5--> <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <TabItem Header="Personen">
+            <Grid Background="Black">
+                <Grid.ColumnDefinitions>
+                    <!--0-->
+                    <ColumnDefinition Width="1*" />
+                    <!--1-->
+                    <ColumnDefinition Width="1*" />
+                    <!--2-->
+                    <ColumnDefinition Width="1*" />
+                    <!--3-->
+                    <ColumnDefinition Width="1*" />
+                    <!--4-->
+                    <ColumnDefinition Width="1*" />
+                    <!--5-->
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!--0-->
+                    <RowDefinition Height="Auto"/>
+                    <!--1-->
+                    <RowDefinition Height="Auto"/>
+                    <!--2-->
+                    <RowDefinition Height="Auto"/>
+                    <!--3-->
+                    <RowDefinition Height="Auto"/>
+                    <!--4-->
+                    <RowDefinition Height="Auto"/>
+                    <!--5-->
+                    <RowDefinition Height="Auto"/>
+                    <!--6-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0"
-               Content="Zahl eingeben"
-               Foreground="White" />
+                <Label Grid.Column="0" Grid.Row="0"
+                       Content="Zahl eingeben"
+                       Foreground="White" />
+                <TextBox Grid.Column="0" Grid.Row="1"
+                         x:Name="CountPerson"
+                         TextWrapping="Wrap"
+                         Margin="2"/>
+                <Button Grid.Column="5" Grid.Row="1" 
+                        Content="Generieren"
+                        x:Name="GenerateRandomPerson"
+                        Margin="2"/>
 
-        <TextBox Grid.Column="0" Grid.Row="1"
-                x:Name="CountPerson"
-                 MinHeight="25"
-                 TextWrapping="Wrap"
-                 Margin="5"/>
+                <Label Grid.Column="0" Grid.Row="3" 
+                       Content="Vorname"
+                       Foreground="White"/>
+                <TextBox Grid.Column="0" Grid.Row="4"
+                         x:Name="FirstName"
+                         Margin="2"/>
 
-        <Button Grid.Column="2" Grid.Row="1"
-                Content="Liste Hinzufügen"
-                x:Name="AddXmlFile" Margin="5"/>
+                <Label Grid.Column="1" Grid.Row="3"
+                       Content="Nachname"
+                       Foreground="White"/>
+                <TextBox Grid.Column="1" Grid.Row="4"
+                         x:Name="LastName"
+                         Margin="2"/>
 
-        <Button Grid.Column="3" Grid.Row="1" 
-                Content="Generieren"
-                x:Name="GenerateRandomPerson"
-                MinHeight="25"
-                Margin="5"/>
-        
-        <Button Grid.Column="4" Grid.Row="1"
-                Content="Speichern"
-                x:Name="SaveListToXmlFile"
-                Margin="5"/>
-        
-        <Button Grid.Row="1" Grid.Column="5" 
-                Content="Liste leeren"
-                x:Name="DeletePersonList" 
-                MinHeight="25"
-                Margin="5"/>
+                <Label Grid.Column="2" Grid.Row="3"
+                       Content="Geburtsdatum"
+                       Foreground="White"/>
+                <TextBox Grid.Column="2" Grid.Row="4"
+                         Text="{Binding BirthDay, StringFormat=dd-MM-yyyy}"                            
+                         Margin="2"/>
 
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="123456" 
-                  Height="400"
-                  ItemsSource="{Binding PersonList}"
-                  Margin="5"
-                  MinRowHeight="25"
-                  MinColumnWidth="125"
-                  AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay, StringFormat=dd.MM.yyyy}"/>
-                <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <Label Grid.Column="3" Grid.Row="3"   
+                       Content="Haarfarbe"                        
+                       Foreground="White"/>
+                <ComboBox Grid.Column="3" Grid.Row="4"
+                          x:Name="HairColor"
+                          ItemsSource="{Binding Path= HairColorList, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding Path=HairColor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          Margin="2"/>
+                <Button Grid.Column="5" Grid.Row="4"
+                        x:Name="CreateNewPerson"
+                        Content="Neue Person"
+                        Margin="2"/>
 
-        <Label Grid.Column="0" Grid.Row="3" 
-                Content="Vorname"
-               Foreground="White"/>
-        
-        <TextBox Grid.Column="0" Grid.Row="4"
-                x:Name="FirstName"
-                 MinHeight="25"
-                 TextWrapping="Wrap"
-                 Margin="5"/>
+                <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="7" 
+                          ItemsSource="{Binding PersonList}"
+                          Margin="2"
+                          MinHeight="300" MaxHeight="800"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-        <Label Grid.Column="1" Grid.Row="3"
-               Content="Nachname"
-               Foreground="White"/>
-        
-        <TextBox Grid.Column="1" Grid.Row="4"
-                x:Name="LastName"
-                 MinHeight="25"
-                 TextWrapping="Wrap"
-                 Margin="5"/>
+                <StackPanel Grid.Column="5" Grid.Row="6">
+                    <Button Content="Liste Hinzufügen"
+                            x:Name="AddXmlFile"
+                            Margin="2"/>
 
-        <Label Grid.Column="2" Grid.Row="3"
-               Content="Geburtsdatum"
-               Foreground="White"/>
-        
-        <TextBox Grid.Column="2" Grid.Row="4"
-                 Text="{Binding BirthDay, StringFormat=dd-MM-yyyy}"
-                 MinHeight="25"
-                 TextWrapping="Wrap"
-                 Margin="5"/>
+                    <Button Content="Speichern"
+                            x:Name="SaveListAsXmlFile"
+                            VerticalAlignment="Bottom"
+                            Margin="2"/>
 
-        <Label Grid.Column="3" Grid.Row="3"
-               Content="Haarfarbe"
-               Foreground="White"/>
-        
-        <ComboBox Grid.Column="3" Grid.Row="4"
-                  x:Name="HairColor"
-                  ItemsSource="{Binding Path= HairColorList, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding Path=HairColor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                  MinHeight="25"
-                  Margin="5"/>
+                    <Button Content="Liste leeren"
+                            x:Name="DeleteList" 
+                            Margin="2"/>
+                </StackPanel>
 
-        <Button Grid.Column="4" Grid.Row="4"
-                x:Name="Filter"
-                Content="Filtern"
-                MinHeight="25"
-                Margin="5"/>
-        
-        <Button Grid.Column="5" Grid.Row="4"
-                x:Name="CreateNewPerson"
-                Content="Neue Person"
-                MinHeight="25"
-                Margin="5"/>
+            </Grid>
+        </TabItem>
 
-        <DataGrid Grid.Row="5" Grid.ColumnSpan="123456" 
-                  Height="400"
-                  ItemsSource="{Binding ListPersonFiltered}"
-                  Margin="5"
-                  MinRowHeight="25"
-                  MinColumnWidth="125"
-                  AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay, StringFormat=dd.MM.yyyy}"/>
-                <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        <TabItem Header="Filtern">
+            <Grid Background="Black">
+                <Grid.ColumnDefinitions>
+                    <!--0-->
+                    <ColumnDefinition Width="1*" />
+                    <!--1-->
+                    <ColumnDefinition Width="1*" />
+                    <!--2-->
+                    <ColumnDefinition Width="1*" />
+                    <!--3-->
+                    <ColumnDefinition Width="1*" />
+                    <!--4-->
+                    <ColumnDefinition Width="1*" />
+                    <!--5-->
+                    <ColumnDefinition Width="1*" />
+                    <!--6-->
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!--0-->
+                    <RowDefinition Height="Auto"/>
+                    <!--1-->
+                    <RowDefinition Height="Auto"/>
+                    <!--2-->
+                    <RowDefinition Height="Auto"/>
+                    <!--3-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" 
+                       Content="Vorname"
+                       Foreground="White"/>
+                <TextBox Grid.Column="0" Grid.Row="1"
+                         Text="{Binding FirstName}"
+                         Margin="2"/>
+
+                <Label Grid.Column="1" Grid.Row="0"
+                       Content="Nachname"
+                       Foreground="White"/>
+                <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding LastName}"
+                         Margin="2"/>
+
+                <Label Grid.Column="2" Grid.Row="0"
+                       Content="Geburtsdatum"
+                       Foreground="White"/>
+                <TextBox Grid.Column="2" Grid.Row="1"
+                         Text="{Binding BirthDay, StringFormat=dd-MM-yyyy}"                            
+                         Margin="2"/>
+
+                <Label Grid.Column="3" Grid.Row="0"   
+                       Content="Haarfarbe"                        
+                       Foreground="White"/>
+                <ComboBox Grid.Column="3" Grid.Row="1"
+                          x:Name="hairColor"
+                          ItemsSource="{Binding Path= HairColorList, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding Path=HairColor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          Margin="2"/>
+                <Button Grid.Column="6" Grid.Row="1"
+                        x:Name="Filter"
+                        Content="Filtern"
+                        Margin="2"/>
+
+                <DataGrid Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" 
+                          ItemsSource="{Binding ListPersonFiltered}"
+                          Margin="2"
+                          MinHeight="300" MaxHeight="800"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Vorname" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Nachname" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding BirthDay, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="Haarfarbe" Binding="{Binding HairColor}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Column="6" Grid.Row="3">
+                    <Button Content="Liste Hinzufügen"
+                            x:Name="AddFilterList"
+                            Margin="2"/>
+
+                    <Button Content="Speichern"
+                            x:Name="SaveFilterListAsXmlFile"
+                            VerticalAlignment="Bottom"
+                            Margin="2"/>
+
+                    <Button Content="Liste leeren"
+                            x:Name="DeleteFilterList" 
+                            Margin="2"/>
+                </StackPanel>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
 </UserControl>

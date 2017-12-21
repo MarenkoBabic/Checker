@@ -17,12 +17,11 @@
 
         protected override void OnStartup( object sender, StartupEventArgs e )
         {
-            var settings = new Dictionary<string, object>()
+            Dictionary<string, object> settings = new Dictionary<string, object>()
             {
-                {"Height",500 },{"Width",800 }
+                {"Height",600 },{"Width",800 }
             };
-
-            DisplayRootViewFor<ShellViewModel>( settings );
+            DisplayRootViewFor<ShellViewModel>(settings);
         }
 
     }
