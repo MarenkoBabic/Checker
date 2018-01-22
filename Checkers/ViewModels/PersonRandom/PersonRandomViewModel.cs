@@ -3,13 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IO;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Windows;
-    using System.Xml.Serialization;
+    using Caliburn.Micro;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
-
     public class PersonRandomViewModel : ViewModelBase, IShell
     {
         XmlHelper xml = new XmlHelper();
@@ -20,6 +19,8 @@
         /// <summary>
         /// Eingabe für Vorname
         /// </summary>
+        [Required]
+        [MinLength( 2, ErrorMessage = "Test" )]
         public string FirstName
         {
             get;
@@ -86,9 +87,12 @@
             }
         }
 
+
         /// <summary>
         /// Zahleingabe für generieren von Personen
-        /// </summary>
+        /// </summary> 
+        [Required]
+        [Range( 1, 100, ErrorMessage = "Lala" )]
         public string CountPerson { get; set; }
 
         /// <summary>
@@ -117,6 +121,7 @@
         public PersonRandomViewModel()
         {
             PersonList = new ObservableCollection<Person>();
+            ListPersonFiltered = new ObservableCollection<Person>();
         }
 
         /// <summary>
@@ -138,12 +143,12 @@
             if( !string.IsNullOrEmpty( BirthDay ) )
             {
                 bool result = DateTime.TryParse( BirthDay, out DateTime birthDay );
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDay, HairColor, PersonList );
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDay, HairColor, PersonList, ListPersonFiltered );
             }
             else
             {
                 DateTime? birthDayNull = null;
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDayNull, HairColor, PersonList );
+                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDayNull, HairColor, PersonList, ListPersonFiltered );
             }
         }
 
@@ -173,6 +178,7 @@
             list = xml.LoadXmlFile( XmlPath );
             list.ForEach( PersonList.Add );
         }
+
         /// <summary>
         /// Der gefilterten Liste eine Xml-Datein hinzufügen
         /// </summary>
@@ -181,7 +187,10 @@
             XmlPath = xml.OpenFileDialog();
             List<Person> list = new List<Person>();
             list = xml.LoadXmlFile( XmlPath );
-            list.ForEach( ListPersonFiltered.Add );
+            if( list.Count >= 1 )
+            {
+                list.ForEach( ListPersonFiltered.Add );
+            }
         }
 
         /// <summary>
@@ -189,7 +198,11 @@
         /// </summary>
         public void DeleteList()
         {
-            PersonList.Clear();
+            MessageBoxResult result = MessageBox.Show( "Liste wirklich löschen ? Nicht gespeichert Daten gehen verloren!", "caption", MessageBoxButton.YesNo, MessageBoxImage.Question );
+            if( result == MessageBoxResult.Yes )
+            {
+                PersonList.Clear();
+            }
         }
 
         /// <summary>
@@ -197,7 +210,11 @@
         /// </summary>
         public void DeleteFilterList()
         {
-            ListPersonFiltered.Clear();
+            MessageBoxResult result = MessageBox.Show( "Liste wirklich löschen ? Nicht gespeichert Daten gehen verloren!", "caption", MessageBoxButton.YesNo, MessageBoxImage.Question );
+            if( result == MessageBoxResult.Yes )
+            {
+                ListPersonFiltered.Clear();
+            }
         }
 
         /// <summary>

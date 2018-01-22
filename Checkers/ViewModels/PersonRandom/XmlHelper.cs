@@ -17,7 +17,7 @@
         public List<Person> LoadXmlFile( string path )
         {
             var list = new List<Person>();
-            if( path == null )
+            if( string.IsNullOrEmpty(path))
             {
                 return list;
             }

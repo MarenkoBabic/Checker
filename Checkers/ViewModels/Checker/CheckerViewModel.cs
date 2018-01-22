@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
@@ -125,7 +126,7 @@
             if( SelectedChecker is PalindromeChecker )
             {
                 bool test = SelectedChecker.Validate( Text );
-                Result result = new Result() {Text = Text,TestTime = DateTime.Now,TestResult = PalindromeResult(test)};
+                Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = PalindromeResult( test ) };
                 ResultList.Add( result );
 
             }
@@ -136,7 +137,7 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool test = SelectedChecker.Validate( Text );
-                    Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = OddEvenResult(test) };
+                    Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = OddEvenResult( test ) };
                     ResultList.Add( result );
 
                 }
@@ -153,7 +154,7 @@
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
                     bool test = SelectedChecker.Validate( Text );
-                    Result result = new Result() { Text = Text, TestTime = DateTime.Now,TestResult = PrimzahlResult(test)};
+                    Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = PrimzahlResult( test ) };
                     ResultList.Add( result );
                 }
                 else
@@ -173,11 +174,11 @@
         {
             if( result )
             {
-                return  " ist ein Palindrome";
+                return " ist ein Palindrome";
             }
             else
             {
-                return  "ist kein Palindrome";
+                return "ist kein Palindrome";
             }
         }
 
@@ -190,11 +191,11 @@
         {
             if( result )
             {
-                return  "ist eine gerade Zahl";
+                return "ist eine gerade Zahl";
             }
             else
             {
-                return  "ist eine ungerade Zahl";
+                return "ist eine ungerade Zahl";
             }
         }
 
@@ -207,11 +208,11 @@
         {
             if( result )
             {
-                return  "ist eine Primzahl";
+                return "ist eine Primzahl";
             }
             else
             {
-                return  "ist keine Primzahl";
+                return "ist keine Primzahl";
             }
         }
 

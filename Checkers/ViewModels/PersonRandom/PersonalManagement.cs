@@ -43,36 +43,45 @@
         /// <param name="color"> Der mitgebene Wert zum filtern</param>
         /// <param name="listPerson">Die mitgebene Liste zum Filtern </param>
         /// <returns> Gefilterte Liste an Personen</returns>
-        public ObservableCollection<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson )
+        public ObservableCollection<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson, ObservableCollection<Person> ListPersonFiltered )
         {
             ObservableCollection<Person> list = new ObservableCollection<Person>();
             IEnumerable<Person> filteredList = null;
             if( HasValue( firstName ) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
             {
-                filteredList = listPerson;
+                //prüft welche liste Werte hat
+                if( listPerson.Count >= 1 )
+                {
+                    filteredList = listPerson;
+                }
+                else
+                {
+                    filteredList = ListPersonFiltered;
+                }
 
-                //Suche Personen mit Vorname/ Nachname / Vorname und Nachname
+                //Prüft ob Vorname ein wert hat
                 if( HasValue( firstName ) )
                 {
                     filteredList = filteredList.Where( person => person.FirstName.Equals( firstName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
-
+                //Prüft ob Nachname ein wert hat
                 if( HasValue( lastName ) )
                 {
                     filteredList = filteredList.Where( person => person.LastName.Equals( lastName, StringComparison.OrdinalIgnoreCase ) ).ToList();
                 }
-
+                //Prüft ob Geburtstag ein wert hat
                 if( birthDay.HasValue )
                 {
 
                     filteredList = filteredList.Where( person => person.BirthDay.Equals( birthDay ) ).ToList();
                 }
-
+                //Prüft ob Haarfarbe ein wert hat
                 if( color != HairColor.KeineAngabe )
                 {
                     filteredList = filteredList.Where( person => person.HairColor.Equals( color ) ).ToList();
                 }
             }
+            //Prüft ob list nicht leer ist
             if( filteredList != null )
             {
                 filteredList.ToList().ForEach( list.Add );
@@ -93,11 +102,11 @@
         /// <summary>
         /// Erzeugt eine neue Person
         /// </summary>
-        /// <param name="firstName">Der mitgebene Wert</param>
-        /// <param name="lastName">Der mitgebene Wert</param>
-        /// <param name="birthDay">Der mitgebene Wert</param>
-        /// <param name="color">Der mitgebene Wert</param>
-        /// <returns>Eine Person</returns>
+        /// <param name="firstName">Eingabe Vorname</param>
+        /// <param name="lastName">Eingabe Nachname</param>
+        /// <param name="birthDay">Eingabe Geburtsdatum</param>
+        /// <param name="color">Eingabe Haarfarbe</param>
+        /// <returns>neue Person</returns>
         public Person CreateNewPerson( string firstName, string lastName, DateTime? birthDay, HairColor color )
         {
             Person person = new Person( firstName, lastName, birthDay, color );

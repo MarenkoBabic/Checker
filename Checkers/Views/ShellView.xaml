@@ -15,6 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
+            <Label Content="Auswählen"/>
             <Button x:Name="Checker" Content="Checker" Width="200" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top"/>
             <Button x:Name="PersonRandom" Content="Person Generator" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>

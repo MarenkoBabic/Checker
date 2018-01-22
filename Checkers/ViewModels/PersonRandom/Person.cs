@@ -3,9 +3,11 @@
     using System;
     using System.Globalization;
     using Personalmanagement.Dto;
+    using System.ComponentModel.DataAnnotations;
+
+
     public class Person
     {
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? BirthDay { get; set; }
