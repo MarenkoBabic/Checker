@@ -84,6 +84,7 @@
     <Compile Include="ViewModels\PersonRandom\Person.cs" />
     <Compile Include="ViewModels\PersonRandom\PersonRandomViewModel.cs" />
     <Compile Include="ViewModels\PersonRandom\PersonalManagement.cs" />
+    <Compile Include="ViewModels\PersonInput\PersonInputViewModel.cs" />
     <Compile Include="ViewModels\PersonRandom\XmlHelper.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
@@ -92,6 +93,9 @@
     <Compile Include="ViewModels\Checker\CheckerViewModel.cs" />
     <Compile Include="ViewModels\Checker\PrimzahlChecker.cs" />
     <Compile Include="ViewModelBase.cs" />
+    <Compile Include="Views\PersonInputView.xaml.cs">
+      <DependentUpon>PersonInputView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PersonRandomView.xaml.cs">
       <DependentUpon>PersonRandomView.xaml</DependentUpon>
     </Compile>
@@ -132,6 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CheckerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonInputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -82,18 +82,5 @@
             //Assert
             Assert.True( isPalidrome );
         }
-
-        [Fact]
-        public void PalidromeValidateIsNull_ReturnFalse()
-        {
-            //Arrange
-            IChecker checker = new PalindromeChecker();
-
-            //Act
-            bool isPalidrome = checker.Validate( null );
-
-            //Assert
-            Assert.False( isPalidrome );
-        }
     }
 }

@@ -6,15 +6,32 @@
     using System.ComponentModel.DataAnnotations;
 
 
-    public class Person
+    public class Person : ViewModelBase
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime? BirthDay { get; set; }
-        public HairColor HairColor { get; set; }
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        public string LastName
+        {
+            get;
+            set;
+        }
+        public DateTime? BirthDay
+        {
+            get;
+            set;
+        }
+        public HairColor HairColor
+        {
+            get;
+            set;
+        }
 
         public Person()
-        {}
+        { }
         public Person( string firstName, string lastName, DateTime? birthDay, HairColor hairColor )
         {
             this.FirstName = firstName;

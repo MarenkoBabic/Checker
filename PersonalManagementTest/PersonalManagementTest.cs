@@ -135,7 +135,7 @@
             };
 
             //Act
-            personalmanagement.SearchPerson( "Robert", null, null, HairColor.KeineAngabe, listPerson,list);
+            personalmanagement.SearchPerson( "Robert", null, null, HairColor.KeineAngabe, listPerson);
 
             //Assert
             Assert.NotNull( listPerson );
@@ -160,7 +160,7 @@
             };
 
             //Act
-            personalmanagement.SearchPerson( "Marenko", "Babic", null, HairColor.KeineAngabe, listPerson ,list);
+            personalmanagement.SearchPerson( "Marenko", "Babic", null, HairColor.KeineAngabe, listPerson);
 
             //Assert
             Assert.NotNull( listPerson );
@@ -186,7 +186,7 @@
             };
 
             //Act
-            personalmanagement.SearchPerson( "Marenko", "Babic", DateTime.Parse( "13.05.1986" ), HairColor.KeineAngabe, listPerson,list);
+            personalmanagement.SearchPerson( "Marenko", "Babic", DateTime.Parse( "13.05.1986" ), HairColor.KeineAngabe, listPerson);
 
             //Assert
             Assert.NotNull( listPerson );
@@ -212,7 +212,7 @@
             };
 
             //Act
-            personalmanagement.SearchPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.Braun, listPerson,list);
+            personalmanagement.SearchPerson( "Marenko", "Babic", new DateTime( 1986, 05, 13 ), HairColor.Braun, listPerson);
 
             //Assert
             Assert.NotNull( listPerson );

@@ -6,59 +6,27 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Windows;
-    using Caliburn.Micro;
     using Checkers.ViewModels.PersonRandom;
     using Personalmanagement.Dto;
     public class PersonRandomViewModel : ViewModelBase, IShell
     {
         XmlHelper xml = new XmlHelper();
         PersonalManagement personalManager = new PersonalManagement();
-
         #region Property
 
-        /// <summary>
-        /// Eingabe für Vorname
-        /// </summary>
-        [Required]
-        [MinLength( 2, ErrorMessage = "Test" )]
-        public string FirstName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Eingabe für Nachname
-        /// </summary>
-        public string LastName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Eingabe für Geburtsdatum
-        /// </summary>
-        public string BirthDay
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Auswahl Haarfarbe
-        /// </summary>
-        public HairColor HairColor
+        public PersonInputViewModel PersonInputViewModel
         {
             get
             {
-                return hairColor;
+                return personInputViewModel;
             }
             set
             {
-                hairColor = value;
+                personInputViewModel = value;
+                OnPropertyChanged( nameof( PersonInputViewModel ) );
             }
         }
+
 
         /// <summary>
         /// Personenliste gefiltert
@@ -76,24 +44,6 @@
             }
         }
 
-        /// <summary>
-        /// Liste für Auswahl Haarfarbe in der Combobox
-        /// </summary>
-        public IEnumerable<HairColor> HairColorList
-        {
-            get
-            {
-                return Enum.GetValues( typeof( HairColor ) ).Cast<HairColor>();
-            }
-        }
-
-
-        /// <summary>
-        /// Zahleingabe für generieren von Personen
-        /// </summary> 
-        [Required]
-        [Range( 1, 100, ErrorMessage = "Lala" )]
-        public string CountPerson { get; set; }
 
         /// <summary>
         /// Collection von Personenliste
@@ -122,6 +72,7 @@
         {
             PersonList = new ObservableCollection<Person>();
             ListPersonFiltered = new ObservableCollection<Person>();
+            PersonInputViewModel = new PersonInputViewModel();
         }
 
         /// <summary>
@@ -130,9 +81,10 @@
         public void GenerateRandomPerson()
         {
             var list = new List<Person>();
-            bool result = int.TryParse( CountPerson, out int number );
+            bool result = int.TryParse(PersonInputViewModel.CountPerson.ToString(), out int number );
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( PersonList.Add );
+            ListPersonFiltered = PersonList;
         }
 
         /// <summary>
@@ -140,31 +92,41 @@
         /// </summary>
         public void Filter()
         {
-            if( !string.IsNullOrEmpty( BirthDay ) )
+            if( !string.IsNullOrEmpty( PersonInputViewModel.BirthDay ) )
             {
-                bool result = DateTime.TryParse( BirthDay, out DateTime birthDay );
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDay, HairColor, PersonList, ListPersonFiltered );
+                bool result = DateTime.TryParse( PersonInputViewModel.BirthDay, out DateTime birthDay );
+                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDay, PersonInputViewModel.HairColor, PersonList );
             }
             else
             {
                 DateTime? birthDayNull = null;
-                this.ListPersonFiltered = personalManager.SearchPerson( FirstName, LastName, birthDayNull, HairColor, PersonList, ListPersonFiltered );
+                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDayNull, PersonInputViewModel.HairColor, PersonList );
             }
         }
 
+        /// <summary>
+        /// Resettet die Eingabefelder
+        /// </summary>
+        public void Reset()
+        {
+            PersonInputViewModel.FirstName = null;
+            PersonInputViewModel.LastName = null;
+            PersonInputViewModel.BirthDay = null;
+            PersonInputViewModel.HairColor = HairColor.KeineAngabe;
+        }
         /// <summary>
         /// Erzeugt eine einzelne Person
         /// </summary>
         public void CreateNewPerson()
         {
-            if( !string.IsNullOrEmpty( BirthDay ) )
+            if( !string.IsNullOrEmpty( PersonInputViewModel.BirthDay ) )
             {
-                PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, DateTime.Parse( BirthDay ), HairColor ) );
+                PersonList.Add( personalManager.CreateNewPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, DateTime.Parse( PersonInputViewModel.BirthDay ), personInputViewModel.HairColor ) );
             }
             else
             {
                 DateTime? birthDayNull = null;
-                PersonList.Add( personalManager.CreateNewPerson( FirstName, LastName, birthDayNull, HairColor ) );
+                PersonList.Add( personalManager.CreateNewPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDayNull, PersonInputViewModel.HairColor ) );
             }
         }
 
@@ -198,6 +160,7 @@
         /// </summary>
         public void DeleteList()
         {
+            ///Frage den User, ob er wirklich die Liste löschen will 
             MessageBoxResult result = MessageBox.Show( "Liste wirklich löschen ? Nicht gespeichert Daten gehen verloren!", "caption", MessageBoxButton.YesNo, MessageBoxImage.Question );
             if( result == MessageBoxResult.Yes )
             {
@@ -210,6 +173,7 @@
         /// </summary>
         public void DeleteFilterList()
         {
+            ///Frage den User, ob er wirklich die Liste löschen will 
             MessageBoxResult result = MessageBox.Show( "Liste wirklich löschen ? Nicht gespeichert Daten gehen verloren!", "caption", MessageBoxButton.YesNo, MessageBoxImage.Question );
             if( result == MessageBoxResult.Yes )
             {
@@ -233,9 +197,12 @@
             xml.SaveXmlFile( ListPersonFiltered );
         }
 
-        private ObservableCollection<Person> listPersonFiltered;
-        private HairColor hairColor;
-        private string xmlPath;
 
+        #region private
+        private ObservableCollection<Person> listPersonFiltered;
+        private string xmlPath;
+        private PersonInputViewModel personInputViewModel;
+
+        #endregion
     }
 }

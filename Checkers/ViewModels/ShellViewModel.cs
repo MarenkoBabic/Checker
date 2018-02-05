@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
-
-namespace Checkers.ViewModels
+﻿namespace Checkers.ViewModels
 {
-    class ShellViewModel: Conductor<object>,IShell
+    using Caliburn.Micro;
+
+    class ShellViewModel : Conductor<object>, IShell
     {
         public ShellViewModel()
         {
-            
+
         }
         public void Checker()
         {
-           ActivateItem( new CheckerViewModel() );
+            ActivateItem( new CheckerViewModel() );
         }
         public void PersonRandom()
         {
             ActivateItem( new PersonRandomViewModel() );
+        }
+        public void PersonInput()
+        {
+            ActivateItem( new PersonInputViewModel() );
         }
 
     }

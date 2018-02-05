@@ -43,22 +43,13 @@
         /// <param name="color"> Der mitgebene Wert zum filtern</param>
         /// <param name="listPerson">Die mitgebene Liste zum Filtern </param>
         /// <returns> Gefilterte Liste an Personen</returns>
-        public ObservableCollection<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson, ObservableCollection<Person> ListPersonFiltered )
+        public ObservableCollection<Person> SearchPerson( string firstName, string lastName, DateTime? birthDay, HairColor color, ObservableCollection<Person> listPerson )
         {
             ObservableCollection<Person> list = new ObservableCollection<Person>();
             IEnumerable<Person> filteredList = null;
             if( HasValue( firstName ) || HasValue( lastName ) || birthDay.HasValue || color != HairColor.KeineAngabe )
             {
-                //prüft welche liste Werte hat
-                if( listPerson.Count >= 1 )
-                {
-                    filteredList = listPerson;
-                }
-                else
-                {
-                    filteredList = ListPersonFiltered;
-                }
-
+                filteredList = listPerson;
                 //Prüft ob Vorname ein wert hat
                 if( HasValue( firstName ) )
                 {
