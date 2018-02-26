@@ -24,7 +24,12 @@
             using( FileStream fs = File.Open( path, FileMode.Open ) )
             {
                 XmlSerializer deserializer = new XmlSerializer( typeof( List<Person> ) );
-                return (List<Person>)deserializer.Deserialize( fs );
+                XmlReader reader = new XmlTextReader( fs );
+                if( deserializer.CanDeserialize(reader))
+                {
+                    return (List<Person>)deserializer.Deserialize( reader );
+                }
+                return list;
             }
         }
 

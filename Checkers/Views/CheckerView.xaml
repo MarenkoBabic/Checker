@@ -41,7 +41,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
-                   Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=CountPerson}" />
+                   Text="{Binding ErrorMessage}"
+                   Foreground="Red"/>
 
 
         <ComboBox Grid.Column="4" Grid.Row="1"

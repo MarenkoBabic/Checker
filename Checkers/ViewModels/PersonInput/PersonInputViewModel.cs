@@ -20,35 +20,6 @@
         }
 
         /// <summary>
-        /// Prüft ob der Wert validiert ist
-        /// </summary>
-        public bool IsValid
-        {
-            get
-            {
-                return string.IsNullOrEmpty( this.Error ) && !string.IsNullOrEmpty( CountPerson.ToString() );
-            }
-        }
-
-        /// <summary>
-        /// Zahleingabe für generieren von Personen
-        /// </summary> 
-        [Range( 1, 100000, ErrorMessage = "Maximal 100000" )]
-        public int CountPerson
-        {
-            get
-            {
-                return countPerson;
-            }
-            set
-            {
-                countPerson = value;
-                OnPropertyChanged( "CountPerson" );
-                OnPropertyChanged( nameof( IsValid ) );
-            }
-        }
-
-        /// <summary>
         /// Eingabe für Vorname
         /// </summary>
         public string FirstName
@@ -118,14 +89,12 @@
             this.lastName = LastName;
             this.birthDay = BirthDay;
             this.hairColor = HairColor;
-            this.countPerson = CountPerson;
         }
 
         private HairColor hairColor;
         private string firstName;
         private string lastName;
         private string birthDay;
-        private int countPerson;
 
     }
 }

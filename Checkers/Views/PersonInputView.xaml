@@ -18,9 +18,7 @@
             <!--3-->
             <ColumnDefinition Width="1*" />
             <!--4-->
-            <ColumnDefinition Width="1*" />
-            <!--5-->
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!--0-->
@@ -31,52 +29,32 @@
             <RowDefinition Height="Auto"/>
             <!--3-->
             <RowDefinition Height="Auto"/>
-            <!--4-->
-            <RowDefinition Height="Auto"/>
-            <!--5-->
-            <RowDefinition Height="Auto"/>
-            <!--6-->
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0"
-                       Content="Zahl eingeben"
-                       Foreground="White" />
-
-        <TextBox Grid.Column="0" Grid.Row="1"
-                         x:Name="CountPerson"
-                         Text="{Binding CountPerson,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,
-                         ValidatesOnDataErrors=True,NotifyOnValidationError=True,ValidatesOnNotifyDataErrors=True,ValidatesOnExceptions=True}"
-                         MaxLength="6"/>
-
-        <TextBlock Grid.Column="0" Grid.Row="2" 
-                           Text="{Binding (Validation.Errors)[0].ErrorContent,
-                    ElementName=CountPerson}" 
-                           Foreground="Red"/>
 
 
-        <Label Grid.Column="0" Grid.Row="3" 
+        <Label Grid.Column="0" Grid.Row="2" 
                        Content="Vorname"
                        Foreground="White"/>
         <TextBox Grid.Column="0" Grid.Row="4"
                          Text="{Binding FirstName}"
                          Margin="2"/>
 
-        <Label Grid.Column="1" Grid.Row="3"
+        <Label Grid.Column="1" Grid.Row="2"
                        Content="Nachname"
                        Foreground="White"/>
         <TextBox Grid.Column="1" Grid.Row="4"
                          Text="{Binding LastName}"
                          Margin="2"/>
 
-        <Label Grid.Column="2" Grid.Row="3"
+        <Label Grid.Column="2" Grid.Row="2"
                        Content="Geburtsdatum"
                        Foreground="White"/>
         <TextBox Grid.Column="2" Grid.Row="4"
                          Text="{Binding BirthDay, StringFormat=dd-MM-yyyy}"                            
                          Margin="2"/>
 
-        <Label Grid.Column="3" Grid.Row="3"   
+        <Label Grid.Column="3" Grid.Row="2"   
                        Content="Haarfarbe"                        
                        Foreground="White"/>
         <ComboBox Grid.Column="3" Grid.Row="4"
@@ -85,4 +63,7 @@
                           SelectedItem="{Binding Path=HairColor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                           Margin="2"/>
 
-    </Grid></UserControl>
+
+
+    </Grid>
+</UserControl>

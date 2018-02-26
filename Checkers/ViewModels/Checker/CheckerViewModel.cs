@@ -10,22 +10,8 @@
     using Caliburn.Micro;
     using Checkers.ViewModels.Checker;
 
-    public class CheckerViewModel : ViewModelBase, IHaveDisplayName, IShell
+    public class CheckerViewModel : ViewModelBase, IShell
     {
-        /// <summary>
-        /// DisplayName
-        /// </summary>
-        public string DisplayName
-        {
-            get
-            {
-                return displayName;
-            }
-            set
-            {
-                displayName = value;
-            }
-        }
 
         /// <summary>
         /// Fehlermeldung bei falsche Eingabe
@@ -84,7 +70,6 @@
 
         public CheckerViewModel()
         {
-            DisplayName = "Checker";
             CheckerAuswahl = new List<IChecker>
             {
                 new PalindromeChecker(),new OddEvenChecker(),new PrimzahlChecker()
@@ -136,14 +121,23 @@
                 Regex reg = new Regex( "^[0-9]+$" );
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
-                    bool test = SelectedChecker.Validate( Text );
-                    Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = OddEvenResult( test ) };
-                    ResultList.Add( result );
+                    ErrorMessage = "";
+                    if( text.Length <= 9 )
+                    {
+                        ErrorMessage = "";
+                        bool test = SelectedChecker.Validate( Text );
+                        Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = OddEvenResult( test ) };
+                        ResultList.Add( result );
+                    }
+                    else
+                    {
+                        ErrorMessage = "Max = 999.999.999";
+                    }
 
                 }
                 else
                 {
-                    ErrorMessage = "Ungültige Angabe";
+                    ErrorMessage = "Ungültige Angabe nur Zahlen erlaubt";
                 }
             }
 
@@ -153,13 +147,21 @@
                 Regex reg = new Regex( "^[0-9]+$" );
                 if( reg.IsMatch( text.TrimStart() ) )
                 {
-                    bool test = SelectedChecker.Validate( Text );
-                    Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = PrimzahlResult( test ) };
-                    ResultList.Add( result );
+                    ErrorMessage = "";
+                    if( text.Length <= 390 )
+                    {
+                        bool test = SelectedChecker.Validate( Text );
+                        Result result = new Result() { Text = Text, TestTime = DateTime.Now, TestResult = PrimzahlResult( test ) };
+                        ResultList.Add( result );
+                    }
+                    else
+                    {
+                        ErrorMessage = "Max. 1E+308";
+                    }
                 }
                 else
                 {
-                    ErrorMessage = "Ungültige Angabe";
+                    ErrorMessage = "Ungültige Angabe nur Zahlen erlaubt";
                 }
             }
         }
@@ -216,7 +218,6 @@
             }
         }
 
-        private string displayName;
         private string errorMessage;
         private string text;
     }

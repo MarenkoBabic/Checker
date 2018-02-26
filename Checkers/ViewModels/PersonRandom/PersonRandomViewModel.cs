@@ -12,7 +12,37 @@
     {
         XmlHelper xml = new XmlHelper();
         PersonalManagement personalManager = new PersonalManagement();
+
         #region Property
+
+        /// <summary>
+        /// Prüft ob der Wert validiert ist
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return string.IsNullOrEmpty( this.Error ) && !string.IsNullOrEmpty( CountPerson.ToString() );
+            }
+        }
+
+        /// <summary>
+        /// Zahleingabe für generieren von Personen
+        /// </summary> 
+        [Range( 1, 100000, ErrorMessage = "Maximal 100000" )]
+        public int CountPerson
+        {
+            get
+            {
+                return countPerson;
+            }
+            set
+            {
+                countPerson = value;
+                OnPropertyChanged( "CountPerson" );
+                OnPropertyChanged( nameof( IsValid ) );
+            }
+        }
 
         public PersonInputViewModel PersonInputViewModel
         {
@@ -81,7 +111,7 @@
         public void GenerateRandomPerson()
         {
             var list = new List<Person>();
-            bool result = int.TryParse(PersonInputViewModel.CountPerson.ToString(), out int number );
+            bool result = int.TryParse(CountPerson.ToString(), out int number );
             list = personalManager.CreateRandomPerson( number );
             list.ForEach( PersonList.Add );
             ListPersonFiltered = PersonList;
@@ -95,12 +125,12 @@
             if( !string.IsNullOrEmpty( PersonInputViewModel.BirthDay ) )
             {
                 bool result = DateTime.TryParse( PersonInputViewModel.BirthDay, out DateTime birthDay );
-                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDay, PersonInputViewModel.HairColor, PersonList );
+                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDay, PersonInputViewModel.HairColor, ListPersonFiltered );
             }
             else
             {
                 DateTime? birthDayNull = null;
-                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDayNull, PersonInputViewModel.HairColor, PersonList );
+                this.ListPersonFiltered = personalManager.SearchPerson( PersonInputViewModel.FirstName, PersonInputViewModel.LastName, birthDayNull, PersonInputViewModel.HairColor, ListPersonFiltered );
             }
         }
 
@@ -113,7 +143,9 @@
             PersonInputViewModel.LastName = null;
             PersonInputViewModel.BirthDay = null;
             PersonInputViewModel.HairColor = HairColor.KeineAngabe;
+            ListPersonFiltered = PersonList;
         }
+
         /// <summary>
         /// Erzeugt eine einzelne Person
         /// </summary>
@@ -202,6 +234,7 @@
         private ObservableCollection<Person> listPersonFiltered;
         private string xmlPath;
         private PersonInputViewModel personInputViewModel;
+        private int countPerson;
 
         #endregion
     }

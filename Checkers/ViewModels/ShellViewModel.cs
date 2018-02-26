@@ -2,11 +2,11 @@
 {
     using Caliburn.Micro;
 
-    class ShellViewModel : Conductor<object>, IShell
+    class ShellViewModel : Conductor<object>, IShell,IHaveDisplayName
     {
         public ShellViewModel()
         {
-
+            DisplayName = "Checker";
         }
         public void Checker()
         {
@@ -20,6 +20,5 @@
         {
             ActivateItem( new PersonInputViewModel() );
         }
-
     }
 }
